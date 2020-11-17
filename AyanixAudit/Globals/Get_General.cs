@@ -1,9 +1,8 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Data;
 using System.Management;
 using System.Runtime.InteropServices;
-using System.Data;
+using Microsoft.Win32;
 
 namespace AyanixAudit.Globals
 {

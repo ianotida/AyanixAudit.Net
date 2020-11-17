@@ -22,3 +22,4 @@ D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csproj.Ge
 D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csproj.CoreCompileInputs.cache
 D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.exe
 D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.pdb
+D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csprojAssemblyReference.cache
