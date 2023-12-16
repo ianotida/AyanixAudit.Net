@@ -22,4 +22,12 @@ D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csproj.Ge
 D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csproj.CoreCompileInputs.cache
 D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.exe
 D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.pdb
-D:\A.PROJECT\WINDOWS\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csprojAssemblyReference.cache
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\bin\Debug\AyanixAudit.exe
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\bin\Debug\AyanixAudit.pdb
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csproj.AssemblyReference.cache
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.frmMain.resources
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\obj\Debug\NPCAudit.Properties.Resources.resources
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csproj.GenerateResource.cache
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.csproj.CoreCompileInputs.cache
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.exe
+D:\IAN\CODES\AyanixAudit.Net\AyanixAudit\obj\Debug\AyanixAudit.pdb

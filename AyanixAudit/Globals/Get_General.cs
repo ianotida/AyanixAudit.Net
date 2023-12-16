@@ -1,8 +1,9 @@
-﻿using System;
-using System.Data;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.Management;
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
+using System.Data;
 
 namespace AyanixAudit.Globals
 {
@@ -187,9 +188,13 @@ namespace AyanixAudit.Globals
                 ObjSch = new ManagementObjectSearcher(MScope,  new ObjectQuery("SELECT * FROM Win32_Printer"));
                 foreach (ManagementObject m in  ObjSch.Get())
                 {
-                    sResult += Helper.PadString(" Printer " + cnt,30) + " : " + m["DriverName"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("   Port",30) + " : " + m["PortName"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("   Shared",30) + " : " + m["Shared"].ToString() + Environment.NewLine + Environment.NewLine;
+                    if( !m["DriverName"].ToString().Contains("Microsoft"))
+                    {
+                        sResult += Helper.PadString(" Printer " + cnt,30) + " : " + m["DriverName"].ToString() + Environment.NewLine;
+                        sResult += Helper.PadString("   Port",30) + " : " + m["PortName"].ToString() + Environment.NewLine;
+                        sResult += Helper.PadString("   Shared",30) + " : " + m["Shared"].ToString() + Environment.NewLine + Environment.NewLine;
+                    }
+
 
                     cnt++;
                 }
@@ -218,7 +223,8 @@ namespace AyanixAudit.Globals
                 {
                     if(m["Manufacturer"] != null)
                     {
-                        if (m["Manufacturer"].ToString() != "Microsoft")
+                        if (!m["Manufacturer"].ToString().Contains("Microsoft") && 
+                            !m["Manufacturer"].ToString().Contains("VMware"))
                         {
                             sResult += Helper.PadString(" Network Adapter " + cnt, 30) + " : " + m["ProductName"].ToString() + Environment.NewLine;
                             sResult += Helper.PadString("   Maker", 30) + " : " + (m["Manufacturer"] != null ? m["Manufacturer"].ToString() : "-NA-") + Environment.NewLine;
@@ -304,12 +310,12 @@ namespace AyanixAudit.Globals
                         sLDrv += Environment.NewLine;
                     }
 
-                    if(iDrvType == 4 || iDrvType > 5)
-                    {
-                        sNDrv += Helper.PadString("   " + m["ProviderName"].ToString() + " (" + m["Caption"].ToString() + ") ", 50);
+                    //if(iDrvType == 4 || iDrvType > 5)
+                    //{
+                    //    sNDrv += Helper.PadString("   " + m["ProviderName"].ToString() + " (" + m["Caption"].ToString() + ") ", 50);
 
-                        sNDrv += Environment.NewLine;
-                    }                   
+                    //    sNDrv += Environment.NewLine;
+                    //}                   
                 }
 
                 sResult += sLDrv + sNDrv;
@@ -349,7 +355,12 @@ namespace AyanixAudit.Globals
 
                     if (sName != "" && DTProg.Select("Name = '" + sName + "' AND Version = '" + sVer + "'").Length == 0)
                     {
-                        DTProg.Rows.Add(sName, sVer,"Current User");
+                        if(!sName.Contains("Security Update") && 
+                           !sName.Contains("Update for Microsoft"))
+                        {
+                            DTProg.Rows.Add(sName, sVer,"Current User");
+                        }
+                        
                     }
 
                     //if (!LST.Contains(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion")))
@@ -373,7 +384,13 @@ namespace AyanixAudit.Globals
 
                     if (sName != "" && DTProg.Select("Name = '" + sName + "' AND Version = '" + sVer + "'").Length == 0)
                     {
-                        DTProg.Rows.Add(sName, sVer,"Local 32");
+
+                        if(!sName.Contains("Security Update") && 
+                           !sName.Contains("Update for Microsoft"))
+                        {
+                            DTProg.Rows.Add(sName, sVer,"Local 32");
+                        }
+                        
                     }
 
                     //if (!LST.Contains(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion")))
@@ -398,7 +415,12 @@ namespace AyanixAudit.Globals
 
                     if (sName != "" && DTProg.Select("Name = '" + sName + "' AND Version = '" + sVer + "'").Length == 0)
                     {
-                        DTProg.Rows.Add(sName, sVer,"Local 64");
+                        if(!sName.Contains("Security Update") && 
+                           !sName.Contains("Update for Microsoft"))
+                        {
+                            DTProg.Rows.Add(sName, sVer,"Local 64");
+                        }
+                        
                     }
 
                     //if (!LST.Contains(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion")))
