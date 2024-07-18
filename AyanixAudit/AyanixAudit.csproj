@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Globals\Get_General.cs" />
     <Compile Include="Globals\Helper.cs" />
+    <Compile Include="Models\PCInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">

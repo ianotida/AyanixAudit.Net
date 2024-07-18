@@ -64,7 +64,7 @@ namespace AyanixAudit
                 sResult += Globals.Get_WMI.Get_Softwares();
 
                 Delegate_Msg(" * Saving Data...");
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
 
                 Delegate_Msg(sResult,true);
 

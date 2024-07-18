@@ -1,0 +1,298 @@
+ ==============================================================================================================
+  GENERAL INFORMATION
+ ==============================================================================================================
+   Board Model                 : HP 802F
+   Board Serial No             : PESRH0WCYA70ZJ
+   BIOS                        : HP CZC8108WMJ
+   BIOS Release Date           : Thu, Oct 05 2017 03:00:00 AM
+   Processor                   : Intel(R) Xeon(R) CPU E3-1225 v6 @ 3.30GHz
+   Processor Cores             : 4
+   Logical Cores               : 4
+ --------------------------------------------------------------------------------------------------------------
+   System Name                 : NPC-00454
+   System Model                : HP Z240 Tower Workstation
+   System Memory               : 16 GB
+   Logon User                  : NPCPLANT\ian.otida
+   Domain                      : NPCPLANT.NET
+   OS Name                     : Microsoft Windows 11 Pro (64-bit)
+   OS Build                    : 10.0.22621
+   Date Installed              : Fri, Nov 18 2022 02:43:52 AM
+ ==============================================================================================================
+  LOCAL ACCOUNTS
+ ==============================================================================================================
+   User 1                      : NPC-00454\Administrator
+   User 2                      : NPC-00454\DefaultAccount
+   User 3                      : NPC-00454\Guest
+   User 4                      : NPC-00454\NPCIT
+   User 5                      : NPC-00454\WDAGUtilityAccount
+ ==============================================================================================================
+  DISPLAY ADAPTER
+ ==============================================================================================================
+   Display 1                   : Intel(R) HD Graphics P630
+     Resolution                : 1920 x 1080 @ 59 Hz
+     Driver Version            : 22.20.16.4811
+     Driver Date               : Fri, Sep 22 2017 03:00:00 AM
+ ==============================================================================================================
+  DISK AND DRIVES
+ ==============================================================================================================
+   Physical Disk 1             : WDC WD10EZEX-60M2NA0
+     Size                      : 931.5 GB
+     Partitions                : 2
+   Physical Disk 2             : Samsung SSD 870 EVO 250GB
+     Size                      : 931.5 GB
+     Partitions                : 3
+ --------------------------------------------------------------------------------------------------------------
+   Drives                        File System      Total Used     Total Capacity 
+ --------------------------------------------------------------------------------------------------------------
+   HD OS (C:)                    NTFS             164.9 GB       930.8 GB       
+   HD DATA (D:)                  NTFS             129.4 GB       478.5 GB       
+   HD BACKUP (E:)                NTFS             220.9 GB       453 GB         
+   \\mars\ITScan (H:)                                  
+   \\mars\ITDocs (I:)                                  
+   \\HERON\IanOtida (N:)                               
+   \\HERON\Global (O:)                                 
+   \\HERON\IT (S:)                                     
+   \\HERON\IT_App_Dev (T:)                             
+ ==============================================================================================================
+  INPUT DEVICES
+ ==============================================================================================================
+   Description                 : Microsoft Hardware USB Keyboard
+     Device ID                 :   USB\VID_045E&PID_0745&MI_00\6&C9842F4&0&0000
+   Description                 : Microsoft HID-compliant mouse
+     Device ID                 :   HID\VID_045E&PID_0745&MI_01&COL01\7&4700411&0&0000
+ ==============================================================================================================
+  PRINTERS
+ ==============================================================================================================
+   Printer 1                   : PCL6 Driver for Universal Print
+     Port                      :   192.168.120.239
+   Printer 2                   : HP LaserJet 200 color M251 PCL6 Class Driver
+     Port                      :   WSD-80b6b9fa-d86b-414c-88ef-8f706c82ac88
+ ==============================================================================================================
+  NETWORK ADAPTERS
+ ==============================================================================================================
+   Network Adapter 1           : Intel(R) Ethernet Connection (2) I219-LM
+     MAC Address               :   -NA-
+   Network Adapter 2           : Intel(R) PRO/1000 PT Dual Port Network Connection
+     MAC Address               :   E8:39:35:11:15:6E
+   Network Adapter 3           : Intel(R) PRO/1000 PT Dual Port Network Connection
+     MAC Address               :   E8:39:35:11:15:6F
+ --------------------------------------------------------------------------------------------------------------
+   IP Address                    Netmask             Gateway             Adapter             
+ --------------------------------------------------------------------------------------------------------------
+   10.0.3.108                    255.255.252.255     10.0.1.254          Intel(R) PRO/1000 PT Dual Port Network Connection
+   192.168.121.21                255.255.252.0       255.255.252.255     Intel(R) PRO/1000 PT Dual Port Network Connection #2
+   192.168.159.1                 255.255.255.0                           VMware Virtual Ethernet Adapter for VMnet1
+   fe80::e452:1180:34a7:6b9b     64                                      VMware Virtual Ethernet Adapter for VMnet1
+   192.168.184.1                 255.255.255.0                           VMware Virtual Ethernet Adapter for VMnet8
+   fe80::d42f:2d3a:6538:c104     64                                      VMware Virtual Ethernet Adapter for VMnet8
+ ==============================================================================================================
+  INSTALLED SOFTWARE                                                                       : VERSION         INSTALLED
+ ==============================================================================================================
+  Adobe Acrobat Reader                                                                     : 24.002.20895    Local 32
+  Adobe Photoshop 2020                                                                     : 21.0.2          Local 32
+  Adobe Refresh Manager                                                                    : 1.8.0           Local 32
+  Chromium                                                                                 : 111.0.5563.147  Current User
+  ClickOnce Bootstrapper Package for Microsoft .NET Framework                              : 4.8.09037       Local 32
+  DevExpress Components 23.1                                                               : 23.1.4          Local 32
+  Entity Framework 6.2.0 Tools  for Visual Studio 2022                                     : 6.2.0.0         Local 32
+  Foxit PDF Reader                                                                         : 12.1.2.15332    Local 32
+  GitHub Desktop                                                                           : 3.4.1           Current User
+  Graphtec Studio                                                                          : 2.2.1252        Local 32
+  Herramientas de corrección de Microsoft Office 2016: español                             : 16.0.4266.1001  Local 32
+  icecap_collection_neutral                                                                : 16.9.31004      Local 32
+  icecap_collection_neutral                                                                : 17.4.33006      Local 32
+  icecap_collectionresources                                                               : 16.9.31004      Local 32
+  icecap_collectionresources                                                               : 17.4.33006      Local 32
+  icecap_collectionresourcesx64                                                            : 16.9.31004      Local 32
+  icecap_collectionresourcesx64                                                            : 17.4.33006      Local 32
+  Integration Services                                                                     : 16.0.5107.0     Local 32
+  Intel(R) Processor Graphics                                                              : 22.20.16.4811   Local 32
+  IntelliTraceProfilerProxy                                                                : 15.0.21225.01   Local 32
+  K-Lite Codec Pack 17.4.5 Standard                                                        : 17.4.5          Local 32
+  Microsoft .NET Framework 4 Multi-Targeting Pack                                          : 4.0.30319       Local 32
+  Microsoft .NET Framework 4.5 Multi-Targeting Pack                                        : 4.5.50710       Local 32
+  Microsoft .NET Framework 4.5 SDK                                                         : 4.5.50710       Local 32
+  Microsoft .NET Framework 4.5.1 Multi-Targeting Pack                                      : 4.5.50932       Local 32
+  Microsoft .NET Framework 4.5.1 Multi-Targeting Pack (ENU)                                : 4.5.50932       Local 32
+  Microsoft .NET Framework 4.5.1 SDK                                                       : 4.5.51641       Local 32
+  Microsoft .NET Framework 4.5.2 Multi-Targeting Pack                                      : 4.5.51651       Local 32
+  Microsoft .NET Framework 4.5.2 Multi-Targeting Pack (ENU)                                : 4.5.51209       Local 32
+  Microsoft .NET Framework 4.7.2 Targeting Pack                                            : 4.7.03062       Local 32
+  Microsoft .NET Framework 4.7.2 Targeting Pack (ENU)                                      : 4.7.03062       Local 32
+  Microsoft .NET Framework 4.8 SDK                                                         : 4.8.03928       Local 32
+  Microsoft .NET Framework 4.8 Targeting Pack                                              : 4.8.03761       Local 32
+  Microsoft .NET Framework 4.8 Targeting Pack (ENU)                                        : 4.8.03761       Local 32
+  Microsoft .NET Framework Cumulative Intellisense Pack for Visual Studio (ENU)            : 4.8.09037       Local 32
+  Microsoft .NET Host - 7.0.0 (x86)                                                        : 56.3.50341      Local 32
+  Microsoft .NET Host FX Resolver - 7.0.0 (x86)                                            : 56.3.50341      Local 32
+  Microsoft .NET Runtime - 5.0.17 (x86)                                                    : 40.68.31213     Local 32
+  Microsoft .NET Runtime - 6.0.11 (x86)                                                    : 48.47.50420     Local 32
+  Microsoft .NET Runtime - 7.0.0 (x86)                                                     : 56.3.50341      Local 32
+  Microsoft .NET Targeting Pack - 6.0.11 (x86)                                             : 48.47.50420     Local 32
+  Microsoft .NET Targeting Pack - 7.0.0 (x86)                                              : 56.3.50341      Local 32
+  Microsoft Analysis Services OLE DB Provider                                              : 16.0.5143.0     Local 32
+  Microsoft ASP.NET Core 5.0.17 Shared Framework (x86)                                     : 5.0.17.22215    Local 32
+  Microsoft ASP.NET Core 6.0.11 Shared Framework (x86)                                     : 6.0.11.22523    Local 32
+  Microsoft ASP.NET Core 6.0.11 Targeting Pack (x86)                                       : 6.0.11.22523    Local 32
+  Microsoft ASP.NET Core 7.0.0 Shared Framework (x86)                                      : 7.0.0.22518     Local 32
+  Microsoft ASP.NET Core 7.0.0 Targeting Pack (x86)                                        : 7.0.0.22518     Local 32
+  Microsoft ASP.NET Diagnostic Pack for Visual Studio                                      : 17.4.326.54890  Local 32
+  Microsoft ASP.NET Packages for MVC 4 - ENU                                               : 17.0.20604.0    Local 32
+  Microsoft ASP.NET Web Tools Packages 16.0 - ENU                                          : 1.0.21125.0     Local 32
+  Microsoft ASP.NET Web Tools Packages 17.0 - ENU                                          : 17.0.20604.0    Local 32
+  Microsoft Build Tools 14.0 (x86)                                                         : 14.0.23107      Local 32
+  Microsoft Build Tools Language Resources 14.0 (x86)                                      : 14.0.23107      Local 32
+  Microsoft Edge                                                                           : 126.0.2592.102  Local 32
+  Microsoft Edge Update                                                                    : 1.3.193.5       Local 32
+  Microsoft Edge WebView2 Runtime                                                          : 126.0.2592.102  Local 32
+  Microsoft Excel MUI (English) 2016                                                       : 16.0.4266.1001  Local 32
+  Microsoft Exchange Web Services Managed API 2.1                                          : 15.0.847.30     Local 32
+  Microsoft Groove MUI (English) 2016                                                      : 16.0.4266.1001  Local 32
+  Microsoft Help Viewer 2.1                                                                : 2.1.21005       Local 32
+  Microsoft Help Viewer 2.2                                                                : 2.2.23107       Local 32
+  Microsoft Help Viewer 2.3                                                                : 2.3.28307       Local 32
+  Microsoft OData Source for SQL Server 2016                                               : 13.1.4413.3     Local 32
+  Microsoft Office OSM MUI (English) 2013                                                  : 15.0.4569.1506  Local 32
+  Microsoft Office OSM MUI (English) 2016                                                  : 16.0.4266.1001  Local 32
+  Microsoft Office OSM UX MUI (English) 2016                                               : 16.0.4266.1001  Local 32
+  Microsoft Office Proof (English) 2010                                                    : 14.0.7015.1000  Local 32
+  Microsoft Office Proof (French) 2010                                                     : 14.0.7015.1000  Local 32
+  Microsoft Office Proof (Spanish) 2010                                                    : 14.0.7015.1000  Local 32
+  Microsoft Office Proofing (English) 2010                                                 : 14.0.7015.1000  Local 32
+  Microsoft Office Proofing (English) 2013                                                 : 15.0.4569.1506  Local 32
+  Microsoft Office Proofing (English) 2016                                                 : 16.0.4266.1001  Local 32
+  Microsoft Office Proofing Tools 2013 - English                                           : 15.0.4569.1506  Local 32
+  Microsoft Office Proofing Tools 2013 - Español                                           : 15.0.4569.1506  Local 32
+  Microsoft Office Proofing Tools 2016 - English                                           : 16.0.4266.1001  Local 32
+  Microsoft Office Shared MUI (English) 2010                                               : 14.0.7015.1000  Local 32
+  Microsoft Office Shared MUI (English) 2013                                               : 15.0.4569.1506  Local 32
+  Microsoft Office Shared MUI (English) 2016                                               : 16.0.4266.1001  Local 32
+  Microsoft Office Shared Setup Metadata MUI (English) 2010                                : 14.0.7015.1000  Local 32
+  Microsoft Office Shared Setup Metadata MUI (English) 2013                                : 15.0.4569.1506  Local 32
+  Microsoft Office Shared Setup Metadata MUI (English) 2016                                : 16.0.4266.1001  Local 32
+  Microsoft Office Standard 2016                                                           : 16.0.4266.1001  Local 32
+  Microsoft Office Visio MUI (English) 2010                                                : 14.0.7015.1000  Local 32
+  Microsoft OneNote MUI (English) 2016                                                     : 16.0.4266.1001  Local 32
+  Microsoft Outlook MUI (English) 2016                                                     : 16.0.4266.1001  Local 32
+  Microsoft PowerPoint MUI (English) 2016                                                  : 16.0.4266.1001  Local 32
+  Microsoft Publisher MUI (English) 2016                                                   : 16.0.4266.1001  Local 32
+  Microsoft Silverlight                                                                    : 5.1.20513.0     Local 32
+  Microsoft Silverlight 5 SDK                                                              : 5.0.61118.0     Local 32
+  Microsoft SQL Server 2012 Data-Tier App Framework                                        : 11.1.2902.0     Local 32
+  Microsoft SQL Server 2012 Management Objects                                             : 11.1.3000.0     Local 32
+  Microsoft SQL Server 2012 T-SQL Language Service                                         : 11.1.3000.0     Local 32
+  Microsoft SQL Server 2014 Management Objects                                             : 12.0.2000.8     Local 32
+  Microsoft SQL Server 2016                                                                :                 Local 32
+  Microsoft SQL Server 2016 Policies                                                       : 13.0.1601.5     Local 32
+  Microsoft SQL Server 2016 Setup (English)                                                : 13.0.1601.5     Local 32
+  Microsoft SQL Server Data Tools - enu (12.0.30919.1)                                     : 12.0.30919.1    Local 32
+  Microsoft SQL Server Data Tools Build Utilities - enu (12.0.30919.1)                     : 12.0.30919.1    Local 32
+  Microsoft SQL Server Data-Tier Application Framework (x86)                               : 13.0.3560.4     Local 32
+  Microsoft SQL Server Management Studio - 16.5.3                                          : 13.0.16106.4    Local 32
+  Microsoft SQL Server Management Studio - 19.0.2                                          : 19.0.20209.0    Local 32
+  Microsoft SQL Server System CLR Types                                                    : 10.50.1600.1    Local 32
+  Microsoft System CLR Types for SQL Server 2012                                           : 11.1.3366.16    Local 32
+  Microsoft System CLR Types for SQL Server 2014                                           : 12.0.2402.11    Local 32
+  Microsoft TestPlatform SDK Local Feed                                                    : 17.0.0.5175695  Local 32
+  Microsoft Visio MUI (English) 2013                                                       : 15.0.4569.1506  Local 32
+  Microsoft Visio Professional 2013                                                        : 15.0.4569.1506  Local 32
+  Microsoft Visual Basic/C++ Runtime (x86)                                                 : 1.1.0           Local 32
+  Microsoft Visual C++ 2005 Redistributable                                                : 8.0.61187       Local 32
+  Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.7523                           : 9.0.30729.7523  Local 32
+  Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219                              : 10.0.40219      Local 32
+  Microsoft Visual C++ 2012 Redistributable (x64) - 11.0.60610                             : 11.0.60610.1    Local 32
+  Microsoft Visual C++ 2012 Redistributable (x86) - 11.0.60610                             : 11.0.60610.1    Local 32
+  Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61135                            : 11.0.61135      Local 32
+  Microsoft Visual C++ 2012 x86 Minimum Runtime - 11.0.61135                               : 11.0.61135      Local 32
+  Microsoft Visual C++ 2013 Redistributable (x64) - 12.0.30501                             : 12.0.30501.0    Local 32
+  Microsoft Visual C++ 2013 Redistributable (x64) - 12.0.40660                             : 12.0.40660.0    Local 32
+  Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.30501                             : 12.0.30501.0    Local 32
+  Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.40660                             : 12.0.40660.0    Local 32
+  Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.40664                            : 12.0.40664      Local 32
+  Microsoft Visual C++ 2013 x86 Debug Runtime - 12.0.21005                                 : 12.0.21005      Local 32
+  Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.40664                               : 12.0.40664      Local 32
+  Microsoft Visual C++ 2015 x86 Debug Runtime - 14.0.23026                                 : 14.0.23026      Local 32
+  Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.36.32532                       : 14.36.32532.0   Local 32
+  Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.36.32532                       : 14.36.32532.0   Local 32
+  Microsoft Visual C++ 2022 X86 Additional Runtime - 14.36.32532                           : 14.36.32532     Local 32
+  Microsoft Visual C++ 2022 X86 Minimum Runtime - 14.36.32532                              : 14.36.32532     Local 32
+  Microsoft Visual Studio 2015 Shell (Isolated)                                            : 14.0.23107      Local 32
+  Microsoft Visual Studio 2015 Shell (Isolated)                                            : 14.0.23107.10   Local 32
+  Microsoft Visual Studio 2015 Shell (Isolated) Resources                                  : 14.0.23107      Local 32
+  Microsoft Visual Studio 2015 Shell (Minimum)                                             : 14.0.23107      Local 32
+  Microsoft Visual Studio 2015 Shell (Minimum) Interop Assemblies                          : 14.0.23107      Local 32
+  Microsoft Visual Studio 2015 Shell (Minimum) Resources                                   : 14.0.23107      Local 32
+  Microsoft Visual Studio 2015 XAML Designer                                               : 14.0.23107      Local 32
+  Microsoft Visual Studio 2015 XAML Designer - ENU                                         : 14.0.23107      Local 32
+  Microsoft Visual Studio Code (User)                                                      : 1.90.2          Current User
+  Microsoft Visual Studio Services Hub                                                     : 1.0.23107.00    Local 32
+  Microsoft Visual Studio Setup Configuration                                              : 3.4.1128.26111  Local 32
+  Microsoft Visual Studio Setup WMI Provider                                               : 3.7.2182.35401  Local 32
+  Microsoft Visual Studio Tools for Applications 2015                                      : 14.0.23829      Local 32
+  Microsoft Visual Studio Tools for Applications 2015 Finalizer                            : 14.0.23829      Local 32
+  Microsoft Visual Studio Tools for Applications 2015 Language Support                     : 14.0.23107.00   Local 32
+  Microsoft Visual Studio Tools for Applications 2015 Language Support                     : 14.0.23107.10   Local 32
+  Microsoft Visual Studio Tools for Applications 2015 Language Support - ENU Language Pack : 14.0.23107.00   Local 32
+  Microsoft Visual Studio Tools for Applications 2015 Language Support Finalizer           : 14.0.23107.00   Local 32
+  Microsoft Visual Studio Tools for Applications 2015 x86 Hosting Support                  : 14.0.23829      Local 32
+  Microsoft Visual Studio Tools for Applications 2019                                      : 16.0.31110      Local 32
+  Microsoft Visual Studio Tools for Applications 2019 x86 Hosting Support                  : 16.0.31110      Local 32
+  Microsoft Windows Desktop Runtime - 5.0.17 (x86)                                         : 40.68.31219     Local 32
+  Microsoft Windows Desktop Runtime - 6.0.11 (x86)                                         : 48.47.50419     Local 32
+  Microsoft Windows Desktop Runtime - 7.0.0 (x86)                                          : 56.3.50353      Local 32
+  Microsoft Windows Desktop Targeting Pack - 6.0.11 (x86)                                  : 48.47.50419     Local 32
+  Microsoft Windows Desktop Targeting Pack - 7.0.0 (x86)                                   : 56.3.50353      Local 32
+  Microsoft Word MUI (English) 2016                                                        : 16.0.4266.1001  Local 32
+  Open XML SDK 2.5 for Microsoft Office                                                    : 2.5.5631        Local 32
+  Outils de vérification linguistique 2013 de Microsoft Office - Français                  : 15.0.4569.1506  Local 32
+  Outils de vérification linguistique 2016 de Microsoft Office - Français                  : 16.0.4266.1001  Local 32
+  Prerequisites for SSDT                                                                   : 11.1.3000.0     Local 32
+  psqlODBC                                                                                 : 11.00.0000      Local 32
+  Realtek High Definition Audio Driver                                                     : 6.0.1.8644      Local 32
+  Roslyn Language Services - x86                                                           : 14.0.23107      Local 32
+  SAP Crystal Reports runtime engine for .NET Framework (32-bit)                           : 13.0.33.4485    Local 32
+  SAP Crystal Reports, version for Microsoft Visual Studio                                 : 13.0.33.4485    Local 32
+  SAP Crystal Reports, version for Microsoft Visual Studio (64-bit)                        : 13.0.33.4485    Local 32
+  Service Pack 1 for Microsoft Office 2013 (KB2850036) 32-Bit Edition                      :                 Local 32
+  SQL Server 2016 Client Tools                                                             : 13.0.16106.4    Local 32
+  SQL Server 2016 Client Tools Extensions                                                  : 13.0.1601.5     Local 32
+  SQL Server 2016 Common Files                                                             : 13.0.1601.5     Local 32
+  SQL Server 2016 Management Studio                                                        : 13.0.16106.4    Local 32
+  SQL Server 2016 Management Studio Extensions                                             : 13.0.1601.5     Local 32
+  SQL Server 2016 Management Studio for Analysis Services                                  : 13.0.16106.4    Local 32
+  SQL Server 2016 Management Studio for Analysis Services Localization                     : 13.0.16106.4    Local 32
+  SQL Server 2016 Management Studio for Reporting Services                                 : 13.0.16106.4    Local 32
+  SQL Server 2016 Management Studio for Reporting Services Localization                    : 13.0.16106.4    Local 32
+  SQL Server Management Studio                                                             : 19.0.20209.0    Local 32
+  SQL Server Management Studio Language Pack - English                                     : 19.0.20209.0    Local 32
+  SSMS Post Install Tasks                                                                  : 19.0.20209.0    Local 32
+  Telerik RadControls for WinForms Q3 2010                                                 : 10.3.1110.0     Local 32
+  Tools for .Net 3.5                                                                       : 3.11.50727      Local 32
+  Trend Micro Apex One Security Agent                                                      : 14.0.13260      Local 32
+  UE4 Prerequisites (x64)                                                                  : 1.0.13.0        Local 32
+  Update for  (KB2504637)                                                                  : 1               Local 32
+  Update for Skype for Business 2015 (KB4484289) 32-Bit Edition                            :                 Local 32
+  vcpp_crt.redist.clickonce                                                                : 14.34.31931     Local 32
+  Visual Studio 2017 Isolated Shell for SSMS                                               : 15.0.28308.421  Local 32
+  Visual Studio Community 2022                                                             : 17.4.1          Local 32
+  VS Immersive Activate Helper                                                             : 17.0.118.0      Local 32
+  vs_BlendMsi                                                                              : 17.4.33006      Local 32
+  vs_clickoncebootstrappermsi                                                              : 17.4.33006      Local 32
+  vs_clickoncebootstrappermsires                                                           : 17.4.33006      Local 32
+  vs_clickoncesigntoolmsi                                                                  : 17.4.33006      Local 32
+  vs_communitymsires                                                                       : 17.4.33006      Local 32
+  vs_communitysharedmsi                                                                    : 17.4.33006      Local 32
+  vs_CoreEditorFonts                                                                       : 17.4.33006      Local 32
+  vs_devenvmsi                                                                             : 16.0.28329      Local 32
+  vs_devenvsharedmsi                                                                       : 17.4.33006      Local 32
+  vs_filehandler_amd64                                                                     : 17.4.33006      Local 32
+  vs_filehandler_x86                                                                       : 17.4.33006      Local 32
+  vs_FileTracker_Singleton                                                                 : 17.4.33006      Local 32
+  vs_minshellinteropsharedmsi                                                              : 17.4.33006      Local 32
+  vs_minshellmsires                                                                        : 17.4.33006      Local 32
+  vs_minshellsharedmsi                                                                     : 17.4.33006      Local 32
+  vs_SQLClickOnceBootstrappermsi                                                           : 17.4.33006      Local 32
+  vs_tipsmsi                                                                               : 17.4.33006      Local 32
+  vs_vswebprotocolselectormsi                                                              : 17.4.33006      Local 32
+  WCF RIA Services V1.0 SP2                                                                : 4.1.62812.0     Local 32
+  Winamp                                                                                   : 5.91.0          Local 32
