@@ -43,7 +43,7 @@
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
             this.txtStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtStatus.Size = new System.Drawing.Size(769, 464);
+            this.txtStatus.Size = new System.Drawing.Size(838, 466);
             this.txtStatus.TabIndex = 0;
             this.txtStatus.WordWrap = false;
             // 
@@ -52,7 +52,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(769, 464);
+            this.ClientSize = new System.Drawing.Size(838, 466);
             this.Controls.Add(this.txtStatus);
             this.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

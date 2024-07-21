@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using AyanixAudit.Models;
+using System.Runtime.Remoting.Contexts;
 
 namespace AyanixAudit.Globals
 {
@@ -16,7 +17,8 @@ namespace AyanixAudit.Globals
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetPhysicallyInstalledSystemMemory(out long TotalMemoryInKilobytes);
 
-        public static PCInfo Get_Board2(ManagementScope MScope)
+  
+        public static PCInfo Get_BoardInfo(ManagementScope MScope)
         {
             PCInfo _info = new PCInfo();
 
@@ -146,8 +148,8 @@ namespace AyanixAudit.Globals
 
             try
             {
-                // Search in: CurrentUser
-                key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
+                // Search in: LocalMachine_64
+                key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
                 foreach (String keyName in key.GetSubKeyNames())
                 {
                     RegistryKey Rkey = key.OpenSubKey(keyName);
@@ -163,10 +165,10 @@ namespace AyanixAudit.Globals
                             {
                                 Name = sName,
                                 Version = sVer,
-                                Profile = "Current User"
+                                Profile = "Local 64"
                             };
 
-                            if (!_lst.Contains(_sf)) _lst.Add(_sf);
+                            if(!_lst.Any(x=>x.Name == sName)) _lst.Add(_sf);
                         }
                     }
                 }
@@ -195,7 +197,16 @@ namespace AyanixAudit.Globals
                                 Profile = "Local 32"
                             };
 
-                            if (!_lst.Contains(_sf)) _lst.Add(_sf);
+                            if(!_lst.Any(x=>x.Name == sName)) _lst.Add(_sf);
+                            else
+                            {
+                                var toUpdate = _lst.Single(x => x.Name == sName);
+                                if (toUpdate.Profile != "Local 64,32")
+                                {
+                                    toUpdate.Profile = "Local 64,32";
+                                }
+                                
+                            }
                         }
                     }
                 }
@@ -204,8 +215,8 @@ namespace AyanixAudit.Globals
 
             try
             {
-                // Search in: LocalMachine_64
-                key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
+                // Search in: CurrentUser
+                key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
                 foreach (String keyName in key.GetSubKeyNames())
                 {
                     RegistryKey Rkey = key.OpenSubKey(keyName);
@@ -221,15 +232,19 @@ namespace AyanixAudit.Globals
                             {
                                 Name = sName,
                                 Version = sVer,
-                                Profile = "Local 64"
+                                Profile = "Current User"
                             };
 
-                            if (!_lst.Contains(_sf)) _lst.Add(_sf);
+                            if(!_lst.Any(x=>x.Name == sName)) _lst.Add(_sf);
                         }
                     }
                 }
             }
             catch { }
+
+
+
+
 
             return _lst;
         }
@@ -238,92 +253,77 @@ namespace AyanixAudit.Globals
 
         public static string Get_Board(ManagementScope MScope)
         {
-            string sResult = "";
+            PCInfo _info = Get_BoardInfo(MScope);
             
-            ManagementObjectSearcher ObjSch;
+            string sResult = Helper.Title("GENERAL INFORMATION");
 
-            sResult += Helper.Title("GENERAL INFORMATION");
-
-            try
-            {
-                ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_BaseBoard"));
-                foreach (ManagementObject m in ObjSch.Get())
-                {
-                    sResult += Helper.PadString("   Board Model", 30) + " : " + m["Manufacturer"].ToString() + " " + m["Product"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("   Board Serial No", 30) + " : " + m["SerialNumber"].ToString() + Environment.NewLine;
-                }
-
-                ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_BIOS"));
-                foreach (ManagementObject m in ObjSch.Get())
-                {
-                    sResult += Helper.PadString("   BIOS", 30) + " : " + m["Manufacturer"].ToString() + " " + m["SerialNumber"].ToString()  + Environment.NewLine;
-                    sResult += Helper.PadString("   BIOS Release Date", 30) + " : " + ManagementDateTimeConverter.ToDateTime(m["ReleaseDate"].ToString()).ToString("ddd, MMM dd yyyy hh:mm:ss tt") + Environment.NewLine;
-                }
-
-                ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_Processor"));
-                foreach (ManagementObject m in ObjSch.Get())
-                {
-                    sResult += Helper.PadString("   Processor", 30) + " : " + m["Name"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("   Processor Cores", 30) + " : " + m["NumberOfCores"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("   Logical Cores", 30) + " : " + m["NumberOfLogicalProcessors"].ToString() + Environment.NewLine;
-                }
-
-                sResult += " --------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-
-                ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_ComputerSystem"));
-                foreach (ManagementObject m in ObjSch.Get())
-                {
-                    sResult += Helper.PadString("   System Name", 30) + " : " + Environment.MachineName + Environment.NewLine;
-                    sResult += Helper.PadString("   System Model", 30) + " : " + m["Model"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("   System Memory", 30) + " : " + (Get_MemoryTotal() /1024) + " GB"  + Environment.NewLine;
-                    sResult += Helper.PadString("   Logon User", 30) + " : " + m["UserName"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("   Domain", 30) + " : " + m["Domain"].ToString() + Environment.NewLine;
-                }
-
-                ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_OperatingSystem"));
-                foreach (ManagementObject m in ObjSch.Get())
-                {
-                    sResult += Helper.PadString("   OS Name", 30) + " : " + m["Caption"].ToString() + " (" +  m["OSArchitecture"].ToString() + ")" + Environment.NewLine;
-                    sResult += Helper.PadString("   OS Build", 30) + " : " + m["Version"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("   Date Installed", 30) + " : " + ManagementDateTimeConverter.ToDateTime(m["InstallDate"].ToString()).ToString("ddd, MMM dd yyyy hh:mm:ss tt") + Environment.NewLine;                    
-                }
-
-                //sResult += Environment.NewLine;
-            }
-            catch { }
+            sResult += Helper.PadString("   System Model", 42) + " : " + _info.System_Model + Environment.NewLine;
+            sResult += Helper.PadString("   Board Model", 42) + " : " + _info.Board_Model + Environment.NewLine;
+            sResult += Helper.PadString("   Board Serial No", 42) + " : " + _info.Board_Serial + Environment.NewLine;
+            sResult += Helper.PadString("   BIOS", 42) + " : " + _info.BIOS_Maker + " " + _info.BIOS_Serial + Environment.NewLine;
+            sResult += Helper.PadString("   BIOS Date", 42) + " : " + _info.BIOS_Date + Environment.NewLine;
+            sResult += Helper.PadString("   Processor", 42) + " : " + _info.Processor_Name + Environment.NewLine;
+            sResult += Helper.PadString("   Processor Cores", 42) + " : " + _info.Processor_Cores + Environment.NewLine;
+            sResult += Helper.PadString("   Logical Cores", 42) + " : " + _info.Processor_Logical + Environment.NewLine;
+            sResult += Helper.PadString("   Memory", 42) + " : " + _info.System_RAM + Environment.NewLine;
+            sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+            sResult += Helper.PadString("   Hostname", 42) + " : " + _info.OS_Hostname + Environment.NewLine;
+            sResult += Helper.PadString("   User Login", 42) + " : " + _info.OS_User + Environment.NewLine;
+            sResult += Helper.PadString("   Domain", 42) + " : " + _info.OS_Domain + Environment.NewLine;
+            sResult += Helper.PadString("   OS Installed", 42) + " : " + _info.OS_Name + ";build " + _info.OS_Build + Environment.NewLine;
+            sResult += Helper.PadString("   OS Installed Date", 42) + " : " + _info.OS_InstallDate + Environment.NewLine;
+            sResult += Environment.NewLine;
 
             return sResult;
         }
 
         public static string Get_HID(ManagementScope MScope)
         {
-            string sResult = "";
-
             ManagementClass wmi;
 
-            sResult += Helper.Title("INPUT DEVICES");
+            string sResult = "";
 
             try
             {
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult += Helper.PadString("   Input Device ", 62) +
+                           Helper.PadString("ID", 30) + Environment.NewLine;
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+
                 wmi = new ManagementClass("Win32_KeyBoard");
                 foreach (var keyboard in wmi.GetInstances())
                 {
-                    sResult += Helper.PadString("   Description",30) + " : " + (string)keyboard["Description"] + Environment.NewLine;
-                    sResult += Helper.PadString("     Device ID",30) + " :   " + (string)keyboard["PNPDeviceId"] + Environment.NewLine;
-                    //sResult += Environment.NewLine;
+                    sResult += Helper.PadString("     " +  (string)keyboard["Description"],62);
+                    sResult += Helper.PadString((string)keyboard["PNPDeviceId"],30);
+                    sResult += Environment.NewLine;
                 }
 
                 wmi = new ManagementClass("Win32_PointingDevice");
                 foreach (var mouse in wmi.GetInstances())
                 {
-                    sResult += Helper.PadString("   Description",30) + " : " + (string)mouse["Manufacturer"].ToString() + " " + (string)mouse["Caption"].ToString() + Environment.NewLine;
+                    sResult += Helper.PadString("     " + (string)mouse["Manufacturer"].ToString() + " " + (string)mouse["Caption"].ToString() ,62);
                     //sResult += Helper.PadString("   Description",30) + " : " + (string)mouse["Caption"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("     Device ID",30) + " :   " + (string)mouse["PNPDeviceId"].ToString() + Environment.NewLine;
-
-                    //sResult += Environment.NewLine;
+                    sResult += Helper.PadString( (string)mouse["PNPDeviceId"].ToString(), 30);
+                    sResult += Environment.NewLine;
                 }
 
-                //sResult += Environment.NewLine;
+                sResult += Environment.NewLine;
+
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult += Helper.PadString("   Printer Name ", 62) +
+                           Helper.PadString("Port", 30) + Environment.NewLine;
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+
+                wmi = new ManagementClass("Win32_Printer");
+                foreach (var prn in wmi.GetInstances())
+                {
+                    sResult += Helper.PadString("     " + (string)prn["DriverName"].ToString()  ,62);
+                    sResult += Helper.PadString( (string)prn["PortName"].ToString(), 30);
+                    sResult += Environment.NewLine;
+                }
+
+
+                sResult += Environment.NewLine;
             }
             catch { }
 
@@ -332,24 +332,23 @@ namespace AyanixAudit.Globals
 
         public static string Get_Accounts(ManagementScope MScope)
         {
-            string sResult = "";
-            int cnt = 1;
-
             ManagementObjectSearcher ObjSch;
 
-            sResult += Helper.Title("LOCAL ACCOUNTS");
+            string sResult = "";
 
             try
             {
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult += Helper.PadString("   Local Users ", 62) + Environment.NewLine;
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+
                 ObjSch = new ManagementObjectSearcher(MScope,  new ObjectQuery("SELECT * FROM Win32_UserAccount WHERE Domain = '" + Environment.MachineName + "' "));
                 foreach (ManagementObject m in  ObjSch.Get())
                 {
-                    sResult += Helper.PadString("   User " + cnt, 30) + " : " + m["Caption"].ToString() + Environment.NewLine;
-
-                    cnt++;
+                    sResult += Helper.PadString("     " + m["Caption"].ToString(), 62)  + Environment.NewLine;
                 }
 
-                //sResult += Environment.NewLine;
+                sResult +=Environment.NewLine;
             }
             catch { }
 
@@ -360,33 +359,34 @@ namespace AyanixAudit.Globals
         {
             string sResult = "";
             int cnt = 1;
-
             ManagementObjectSearcher ObjSch;
-
-            sResult += Helper.Title("DISPLAY ADAPTER");
 
             try
             {
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult +=  Helper.PadString("   DISPLAY GPU ", 45) +
+                            Helper.PadString("Resolution ", 32) +
+                            Helper.PadString("Version ", 20) +
+                            Helper.PadString("Date ", 20) + Environment.NewLine;    
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+
                 ObjSch = new ManagementObjectSearcher(MScope,  new ObjectQuery("SELECT * FROM Win32_VideoController"));
                 foreach (ManagementObject m in  ObjSch.Get())
                 {
-                    sResult += Helper.PadString("   Display " + cnt,30) + " : " + m["Caption"].ToString() + Environment.NewLine;
+                    sResult += Helper.PadString("     " + m["Caption"].ToString(), 45);
 
                     if (m["CurrentHorizontalResolution"] != null)
                     {
-                        sResult += Helper.PadString("     Resolution",30) + " : " + m["CurrentHorizontalResolution"].ToString() + " x " + 
-                                                                                    m["CurrentVerticalResolution"].ToString()  + " @ " + 
-                                                                                    m["CurrentRefreshRate"].ToString() + " Hz" + Environment.NewLine;
+                        sResult += Helper.PadString(m["CurrentHorizontalResolution"].ToString() + " x " + 
+                                                    m["CurrentVerticalResolution"].ToString()  + " @ " + 
+                                                    m["CurrentRefreshRate"].ToString() + " Hz" ,32);
 
-                        sResult += Helper.PadString("     Driver Version",30) + " : " + m["DriverVersion"].ToString() + Environment.NewLine;
-                        sResult += Helper.PadString("     Driver Date",30) + " : " + ManagementDateTimeConverter.ToDateTime(m["DriverDate"].ToString()).ToString("ddd, MMM dd yyyy hh:mm:ss tt") + Environment.NewLine;
+                        sResult += Helper.PadString(m["DriverVersion"].ToString(), 20);
+                        sResult += Helper.PadString(ManagementDateTimeConverter.ToDateTime(m["DriverDate"].ToString()).ToString("ddd, MMM dd yyyy") , 20) + Environment.NewLine ;        
                     }
-                   
-                    cnt++;
-                    //sResult += Environment.NewLine;
                 }
 
-                //sResult += Environment.NewLine;
+                sResult += Environment.NewLine;
             }
             catch { }
 
@@ -416,7 +416,7 @@ namespace AyanixAudit.Globals
                     cnt++;
                 }
 
-                //sResult += Environment.NewLine;
+                sResult += Environment.NewLine;
             }
             catch {  return sResult; }
 
@@ -427,14 +427,16 @@ namespace AyanixAudit.Globals
         public static string Get_NetAdapters(ManagementScope MScope)
         {
             string sResult = "";
-            int cnt = 1;
 
             ManagementObjectSearcher ObjSch;
 
-            sResult += Helper.Title("NETWORK ADAPTERS");
-
             try
             {
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult += Helper.PadString("   Network Adapter ", 62) +
+                           Helper.PadString("MAC Address ", 30) + Environment.NewLine;
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+
                 ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_NetworkAdapter "));
                 foreach (ManagementObject m in ObjSch.Get())
                 {
@@ -443,24 +445,28 @@ namespace AyanixAudit.Globals
                         if (!m["Manufacturer"].ToString().Contains("Microsoft") && 
                             !m["Manufacturer"].ToString().Contains("VMware"))
                         {
-                            sResult += Helper.PadString("   Network Adapter " + cnt, 30) + " : " + m["ProductName"].ToString() + Environment.NewLine;                            
-                            sResult += Helper.PadString("     MAC Address", 30) + " :   " + (m["MACAddress"] != null ? m["MACAddress"].ToString() : "-NA-");
-
+                            sResult += Helper.PadString("     " + m["ProductName"].ToString(), 62);                            
+                            sResult += Helper.PadString(m["MACAddress"] != null ? m["MACAddress"].ToString() : "-NA-" , 30) ;
                             sResult += Environment.NewLine ;
-                            cnt++;
                         }
                     }
                 }
 
-                sResult += " --------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-                sResult += Helper.PadString("   IP Address ", 33) +
-                                Helper.PadString("Netmask ", 18) +
-                                Helper.PadString("Gateway ", 18) +
-                                Helper.PadString("Network Adapter ", 18) + Environment.NewLine;
-                sResult += " --------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult += Environment.NewLine;
+            }
+            catch { }
+
+
+            try
+            {
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult += Helper.PadString("   IP Address ", 45) +
+                              Helper.PadString("Netmask ", 17) +
+                              Helper.PadString("Gateway ", 18) +
+                              Helper.PadString("MAC Address ", 18) + Environment.NewLine;
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
               
                 ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT Description,IPAddress,IPSubnet,DefaultIPGateway,MACAddress FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = 'TRUE'"));
-
                 foreach (ManagementObject m in ObjSch.Get())
                 {
                     string sIPGateway = "";
@@ -473,41 +479,14 @@ namespace AyanixAudit.Globals
 
                     for(int i = 0; i < arr_IP.Length;i++)
                     {
-                        sResult += Helper.PadString("   " + arr_IP[i], 33) +
-                                   Helper.PadString(arr_Sub[i], 18) +
+                        sResult += Helper.PadString("     " + arr_IP[i], 45) +
+                                   Helper.PadString(arr_Sub[i], 17) +
                                    Helper.PadString(sIPGateway, 18) +
-                                   Helper.PadString(m["Description"].ToString(), 18) + Environment.NewLine;
+                                   Helper.PadString(m["MACAddress"].ToString(), 18) + Environment.NewLine;
                     }
-
-                    //sIPAddress = string.Join(", ", (string[])m["IPAddress"]);
-                    //sIPMask = string.Join(", ", (string[])m["IPSubnet"]);
-
-
-
-                    //if( sIPAddress != "" )
-                    //{
-                    //    //foreach(string s in (string[])m["IPSubnet"]){           sIPMask = sIPMask == "" ? s : "," + s;          }
-                    //    //foreach(string g in (string[])m["DefaultIPGateway"]){   sIPGateway = sIPGateway == "" ? g : "," + g;    }
-
-                    //    sResult += Helper.PadString("   " + sIPAddress, 25) +
-                    //               Helper.PadString(sIPMask, 25) +
-                    //               Helper.PadString(sIPGateway, 25) +
-                    //               Helper.PadString(m["Description"].ToString(), 25) + Environment.NewLine;
-                    //}
                 }
 
-
-                //ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_IP4RouteTable"));
-
-                //foreach (ManagementObject m in ObjSch.Get())
-                //{
-                //    sResult += Helper.PadString("   " + m["Destination"].ToString(), 25) +
-                //                Helper.PadString(m["Mask"].ToString(), 25) +
-                //                Helper.PadString(m["NextHop"].ToString(), 25) +
-                //                Helper.PadString(m["Metric1"].ToString(), 25) + Environment.NewLine;
-                //}
-
-                //sResult += Environment.NewLine;
+                sResult += Environment.NewLine;
             }
             catch { }
 
@@ -517,30 +496,32 @@ namespace AyanixAudit.Globals
         public static string Get_Drives(ManagementScope MScope)
         {
             string sResult = "", sLDrv = "", sNDrv = "", sName = "";
-            int cnt = 1;
-
+  
             ManagementObjectSearcher ObjSch;
-
-            sResult += Helper.Title("DISK AND DRIVES");
-
             try
             {
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult +=  Helper.PadString("   DISK ", 45) +
+                            Helper.PadString("Size ", 17) +
+                            Helper.PadString("Partitions ", 15) + Environment.NewLine;
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+
                 ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_DiskDrive"));
                 foreach (ManagementObject m in ObjSch.Get())
                 {
-                    sResult += Helper.PadString("   Physical Disk " + cnt, 30) + " : " + m["Caption"].ToString() + Environment.NewLine;
-                    sResult += Helper.PadString("     Size", 30) + " : " + Helper.FormatSize(Convert.ToInt64(m["Size"].ToString())) + Environment.NewLine;
-                    sResult += Helper.PadString("     Partitions", 30) + " : " + m["Partitions"].ToString() + Environment.NewLine ;
-
-                    cnt++;
+                    sResult += Helper.PadString("     " + m["Caption"].ToString(), 45);
+                    sResult += Helper.PadString(Helper.FormatSize(Convert.ToInt64(m["Size"].ToString())), 17);
+                    sResult += Helper.PadString(m["Partitions"].ToString(), 15) + Environment.NewLine ;               
                 }
 
-                sResult += " --------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-                sResult +=  Helper.PadString("   Drives ", 33) +
+                sResult +=Environment.NewLine;
+
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult +=  Helper.PadString("   DRIVES ", 45) +
                             Helper.PadString("File System ", 17) +
                             Helper.PadString("Total Used ", 15) +
                             Helper.PadString("Total Capacity ", 15)  + Environment.NewLine;
-                sResult += " --------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
                 ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_LogicalDisk"));
                 foreach (ManagementObject m in ObjSch.Get())
@@ -553,7 +534,7 @@ namespace AyanixAudit.Globals
 
                         if (sName == "") sName = m["Description"].ToString();
 
-                        sLDrv += Helper.PadString("   " + sName + " (" + m["Caption"].ToString() + ") ", 33);
+                        sLDrv += Helper.PadString("     " + sName + " (" + m["Caption"].ToString() + ") ", 45);
 
                         if (m["Size"] != null )
                         {
@@ -567,14 +548,14 @@ namespace AyanixAudit.Globals
 
                     if (iDrvType == 4 || iDrvType > 5)
                     {
-                        sNDrv += Helper.PadString("   " + m["ProviderName"].ToString() + " (" + m["Caption"].ToString() + ") ", 55);
-     
+                        sNDrv += Helper.PadString("     " + m["ProviderName"].ToString() + " (" + m["Caption"].ToString() + ") ", 45);
+
                         sNDrv += Environment.NewLine;
                     }
                 }
 
                 sResult += sLDrv + sNDrv;
-                //sResult +=Environment.NewLine;
+                sResult +=Environment.NewLine;
             }
             catch { return sResult; }
 
@@ -585,134 +566,25 @@ namespace AyanixAudit.Globals
         {
             string sResult = "";
 
-            DataTable DTProg = new DataTable();
-            DTProg.Columns.Add("Name", typeof(string));
-            DTProg.Columns.Add("Version", typeof(string));
-            DTProg.Columns.Add("Installed", typeof(string));
-
-            //List<string> LST = new List<string>();
-            RegistryKey key;
-
-            string sName = "", sVer = "";
-
-            try
-            {
-                // Search in: CurrentUser
-                key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
-                foreach (String keyName in key.GetSubKeyNames())
-                {
-                    RegistryKey Rkey = key.OpenSubKey(keyName);
-
-                    sName = Rkey.GetValue("DisplayName") != null ? Rkey.GetValue("DisplayName").ToString().Trim() : "";
-                    sVer = Rkey.GetValue("DisplayVersion")!= null ? Rkey.GetValue("DisplayVersion").ToString().Trim() : "";
-
-                    if (sName != "" && DTProg.Select("Name = '" + sName + "' AND Version = '" + sVer + "'").Length == 0)
-                    {
-                        if(!sName.Contains("Security Update") && 
-                           !sName.Contains("Update for Microsoft"))
-                        {
-                            DTProg.Rows.Add(sName, sVer,"Current User");
-                        }
-                        
-                    }
-
-                    //if (!LST.Contains(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion")))
-                    //{
-                    //    //LST.Add(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion"));
-                    //}
-                }
-            }
-            catch { }
-
-            try
-            { 
-                // Search in: LocalMachine_32
-                key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
-                foreach (String keyName in key.GetSubKeyNames())
-                {
-                    RegistryKey Rkey = key.OpenSubKey(keyName);
-
-                    sName = Rkey.GetValue("DisplayName") != null ? Rkey.GetValue("DisplayName").ToString().Trim() : "";
-                    sVer = Rkey.GetValue("DisplayVersion")!= null ? Rkey.GetValue("DisplayVersion").ToString().Trim() : "";
-
-                    if (sName != "" && DTProg.Select("Name = '" + sName + "' AND Version = '" + sVer + "'").Length == 0)
-                    {
-
-                        if(!sName.Contains("Security Update") && 
-                           !sName.Contains("Update for Microsoft"))
-                        {
-                            DTProg.Rows.Add(sName, sVer,"Local 32");
-                        }
-                        
-                    }
-
-                    //if (!LST.Contains(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion")))
-                    //{
-                    //    //LST.Add(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion"));
-                    //    DTProg.Rows.Add(Rkey.GetValue("DisplayName"), Rkey.GetValue("DisplayVersion"));
-                    //}
-                }
-            }
-            catch { }
-
-            try
-            {
-                // Search in: LocalMachine_64
-                key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
-                foreach (String keyName in key.GetSubKeyNames())
-                {
-                    RegistryKey Rkey = key.OpenSubKey(keyName);
-
-                    sName = Rkey.GetValue("DisplayName") != null ? Rkey.GetValue("DisplayName").ToString().Trim() : "";
-                    sVer = Rkey.GetValue("DisplayVersion")!= null ? Rkey.GetValue("DisplayVersion").ToString().Trim() : "";
-
-                    if (sName != "" && DTProg.Select("Name = '" + sName + "' AND Version = '" + sVer + "'").Length == 0)
-                    {
-                        if(!sName.Contains("Security Update") && 
-                           !sName.Contains("Update for Microsoft"))
-                        {
-                            DTProg.Rows.Add(sName, sVer,"Local 64");
-                        }
-                        
-                    }
-
-                    //if (!LST.Contains(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion")))
-                    //{
-                    //    //LST.Add(Rkey.GetValue("DisplayName") + " " + Rkey.GetValue("DisplayVersion"));
-                    //    DTProg.Rows.Add(Rkey.GetValue("DisplayName"), Rkey.GetValue("DisplayVersion"));
-                    //}
-                }
-            }
-            catch { }
-
-            DTProg.DefaultView.Sort = "Name ASC, Version ASC";
-
-
             int iNameLen = 0;
             int iVerLen = 0;
 
-            foreach (DataRow Dr in DTProg.DefaultView.ToTable().Rows)
+            List<PC_Software> _lst = Get_Softwares2().OrderBy(x => x.Name).ToList();
+
+            iNameLen = _lst.Max(x => x.Name.Length);
+            iVerLen = _lst.Max(x=>x.Version.Length);
+
+            sResult += Helper.Title(Helper.PadString("INSTALLED SOFTWARE", iNameLen) + " : " + Helper.PadString("VERSION", iVerLen + 3) + "INSTALLED");
+
+            foreach (PC_Software sf in _lst )
             {
-                if (Dr["Name"].ToString().Length > iNameLen) iNameLen = Dr["Name"].ToString().Length;
-                if (Dr["Version"].ToString().Length > iVerLen) iVerLen = Dr["Version"].ToString().Length;
+                sResult += Helper.PadString("  " + sf.Name , iNameLen + 2) + " : " + 
+                           Helper.PadString( sf.Version , iVerLen + 3) + 
+                           sf.Profile + Environment.NewLine;
             }
-
-
-            sResult += Helper.Title(Helper.PadString("INSTALLED SOFTWARE", iNameLen) + " : " + Helper.PadString("VERSION", iVerLen + 2) + "INSTALLED");
-
-            foreach (DataRow Dr in DTProg.DefaultView.ToTable().Rows)
-            {
-                sResult += Helper.PadString("  " + Dr["Name"].ToString() , iNameLen + 2) + " : " + 
-                           Helper.PadString(Dr["Version"].ToString() , iVerLen + 2) + 
-                           Dr["Installed"].ToString() + Environment.NewLine;
-            }
-
-
-
+            
             return sResult;
         }
-
-
 
 
         private static long Get_MemoryTotal()
@@ -722,4 +594,31 @@ namespace AyanixAudit.Globals
             return (memKb / 1024); // MB
         }
     }
+
+
+    //public class RowString
+    //{
+    //    private string _sRes = "";
+
+    //    public string sHead_Line = " ===================================================================================================================" + Environment.NewLine;
+    //    public string sSubs_Line = " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+
+    //    public int iTitle_Indent = 2;
+    //    public int iColmn_Indent = 4;
+    //    public int iColmn_First = 45;
+    //    public int iColmn_Next = 17;          ;
+    //    public RowString(string sTitle)
+    //    {
+    //        _sRes = sHead_Line;
+    //        _sRes += sTitle.PadLeft(iTitle_Indent) + Environment.NewLine;
+    //        _sRes += sHead_Line;
+    //    }
+
+    //    public void AddRow(string sCol1,string sCol2, string sCol3, string sCol4)
+    //    {
+    //        _sRes += sCol1.PadLeft(iColmn_Indent).PadRight(iColmn_First);
+    //    }
+
+    //    public string TextOut { get { return _sRes; } }
+    //}
 }

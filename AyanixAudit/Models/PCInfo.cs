@@ -23,12 +23,6 @@ namespace AyanixAudit.Models
         public string OS_InstallDate { get; set; }
         public string OS_Domain{ get; set; }
         public string OS_User { get; set; }
-
-        public List<PC_Disk> List_Disk { get; set; }
-        public List<PC_Drive> List_Drives { get; set; }
-        public List<PC_Devices> List_Devices { get; set; }
-        public List<PC_Software> List_Softwares { get; set; }
-        public List<PC_Network> List_Network { get; set; }
     }
 
     public class PC_Devices
@@ -66,7 +60,7 @@ namespace AyanixAudit.Models
     {
         public string MAC_Address { get; set; }
         public string IP_Address { get; set; }
-        public string Subnet { get; set;}
+        public string IP_Subnet { get; set;}
         public string Gateway { get; set; }
         public string Adapter { get; set; }
     }
