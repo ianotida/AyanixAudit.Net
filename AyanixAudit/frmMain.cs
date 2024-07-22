@@ -46,6 +46,9 @@ namespace AyanixAudit
                 Delegate_Msg(" * Getting Users Information...");
                 sResult += Globals.Get_WMI.Get_Accounts(MScope);
 
+                Delegate_Msg(" * Getting RAM Information...");
+                sResult += Globals.Get_WMI.Get_RAM(MScope);
+
                 Delegate_Msg(" * Getting Display Information...");
                 sResult += Globals.Get_WMI.Get_Graphics(MScope);
 

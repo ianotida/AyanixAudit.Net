@@ -16,7 +16,6 @@ namespace AyanixAudit.Globals
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetPhysicallyInstalledSystemMemory(out long TotalMemoryInKilobytes);
-
   
         public static PCInfo Get_BoardInfo(ManagementScope MScope)
         {
@@ -176,44 +175,6 @@ namespace AyanixAudit.Globals
             catch { }
 
             try
-            { 
-                // Search in: LocalMachine_32
-                key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
-                foreach (String keyName in key.GetSubKeyNames())
-                {
-                    RegistryKey Rkey = key.OpenSubKey(keyName);
-
-                    sName = Rkey.GetValue("DisplayName") != null ? Rkey.GetValue("DisplayName").ToString().Trim() : "";
-                    sVer = Rkey.GetValue("DisplayVersion")!= null ? Rkey.GetValue("DisplayVersion").ToString().Trim() : "";
-
-                    if (sName != "")
-                    {
-                        if (!sName.Contains("Security Update") && !sName.Contains("Update for Microsoft"))
-                        {
-                            PC_Software _sf = new PC_Software
-                            {
-                                Name = sName,
-                                Version = sVer,
-                                Profile = "Local 32"
-                            };
-
-                            if(!_lst.Any(x=>x.Name == sName)) _lst.Add(_sf);
-                            else
-                            {
-                                var toUpdate = _lst.Single(x => x.Name == sName);
-                                if (toUpdate.Profile != "Local 64,32")
-                                {
-                                    toUpdate.Profile = "Local 64,32";
-                                }
-                                
-                            }
-                        }
-                    }
-                }
-            }
-            catch { }
-
-            try
             {
                 // Search in: CurrentUser
                 key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
@@ -242,10 +203,6 @@ namespace AyanixAudit.Globals
             }
             catch { }
 
-
-
-
-
             return _lst;
         }
 
@@ -273,6 +230,40 @@ namespace AyanixAudit.Globals
             sResult += Helper.PadString("   OS Installed", 42) + " : " + _info.OS_Name + ";build " + _info.OS_Build + Environment.NewLine;
             sResult += Helper.PadString("   OS Installed Date", 42) + " : " + _info.OS_InstallDate + Environment.NewLine;
             sResult += Environment.NewLine;
+
+            return sResult;
+        }
+
+        public static string Get_RAM(ManagementScope MScope)
+        {
+            string sResult = "";
+
+            ManagementObjectSearcher ObjSch;
+
+            try
+            {
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+                sResult += Helper.PadString("   DIMM SLOT ", 45) +
+                            Helper.PadString("Maker", 17) +
+                            Helper.PadString("Size ", 15) +
+                            Helper.PadString("Speed (MHz) ", 15) +
+                            Helper.PadString("Serial No", 15) + Environment.NewLine;
+                sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
+
+                ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_PhysicalMemory"));
+                foreach (ManagementObject m in  ObjSch.Get())
+                {
+                    sResult += Helper.PadString("     " + m["DeviceLocator"].ToString() + " - " + m["BankLabel"].ToString(),45);
+                    sResult += Helper.PadString(m["Manufacturer"].ToString(), 17);
+                    sResult += Helper.PadString(Helper.FormatSize(Convert.ToInt64(m["Capacity"].ToString())), 15);
+                    sResult += Helper.PadString(m["Speed"].ToString(), 15);
+                    sResult += Helper.PadString(m["SerialNumber"].ToString(), 15) + Environment.NewLine ;        
+                }
+
+                sResult +=Environment.NewLine;
+            }
+            catch { }
+
 
             return sResult;
         }
@@ -574,13 +565,12 @@ namespace AyanixAudit.Globals
             iNameLen = _lst.Max(x => x.Name.Length);
             iVerLen = _lst.Max(x=>x.Version.Length);
 
-            sResult += Helper.Title(Helper.PadString("INSTALLED SOFTWARE", iNameLen) + " : " + Helper.PadString("VERSION", iVerLen + 3) + "INSTALLED");
+            sResult += Helper.Title(Helper.PadString("INSTALLED SOFTWARE", iNameLen + 4) + " " + Helper.PadString("VERSION", iVerLen + 3) );
 
             foreach (PC_Software sf in _lst )
             {
-                sResult += Helper.PadString("  " + sf.Name , iNameLen + 2) + " : " + 
-                           Helper.PadString( sf.Version , iVerLen + 3) + 
-                           sf.Profile + Environment.NewLine;
+                sResult += Helper.PadString("     " + sf.Name , iNameLen + 6) + " " + 
+                           Helper.PadString( sf.Version , iVerLen + 3) + Environment.NewLine;
             }
             
             return sResult;
@@ -596,29 +586,5 @@ namespace AyanixAudit.Globals
     }
 
 
-    //public class RowString
-    //{
-    //    private string _sRes = "";
-
-    //    public string sHead_Line = " ===================================================================================================================" + Environment.NewLine;
-    //    public string sSubs_Line = " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-
-    //    public int iTitle_Indent = 2;
-    //    public int iColmn_Indent = 4;
-    //    public int iColmn_First = 45;
-    //    public int iColmn_Next = 17;          ;
-    //    public RowString(string sTitle)
-    //    {
-    //        _sRes = sHead_Line;
-    //        _sRes += sTitle.PadLeft(iTitle_Indent) + Environment.NewLine;
-    //        _sRes += sHead_Line;
-    //    }
-
-    //    public void AddRow(string sCol1,string sCol2, string sCol3, string sCol4)
-    //    {
-    //        _sRes += sCol1.PadLeft(iColmn_Indent).PadRight(iColmn_First);
-    //    }
-
-    //    public string TextOut { get { return _sRes; } }
-    //}
+  
 }
