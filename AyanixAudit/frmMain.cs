@@ -58,9 +58,6 @@ namespace AyanixAudit
                 Delegate_Msg(" * Getting Input Information...");
                 sResult += Globals.Get_WMI.Get_HID(MScope);
 
-                //Delegate_Msg(" * Getting Printer Information....");
-                //sResult += Globals.Get_WMI.Get_Printers(MScope);
-
                 Delegate_Msg(" * Getting Network Information...");
                 sResult += Globals.Get_WMI.Get_NetAdapters(MScope);
 

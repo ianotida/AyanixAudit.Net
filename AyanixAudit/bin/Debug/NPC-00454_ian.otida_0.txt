@@ -48,8 +48,8 @@
  -------------------------------------------------------------------------------------------------------------------
    DRIVES                                    File System      Total Used     Total Capacity 
  -------------------------------------------------------------------------------------------------------------------
-     HD OS (C:)                              NTFS             226.3 GB       930.8 GB       
-     HD DATA (D:)                            NTFS             161.9 GB       478.5 GB       
+     HD OS (C:)                              NTFS             205.1 GB       930.8 GB       
+     HD DATA (D:)                            NTFS             125.4 GB       478.5 GB       
      HD BACKUP (E:)                          NTFS             220.9 GB       453 GB         
      \\mars\ITScan (H:)                      
      \\mars\ITDocs (I:)                      
@@ -70,7 +70,6 @@
      PCL6 Driver for Universal Print                          192.168.120.239               
      HP LaserJet 200 color M251 PCL6 Class Driver             WSD-80b6b9fa-d86b-414c-88ef-8f706c82ac88
      Microsoft Print To PDF                                   PORTPROMPT:                   
-     Microsoft IPP Class Driver                               WSD-445863d7-7677-4fdb-8788-f96e2362e961
 
  -------------------------------------------------------------------------------------------------------------------
    Network Adapter                                            MAC Address                   
@@ -88,7 +87,7 @@
  ===================================================================================================================
   INSTALLED SOFTWARE                                                                           VERSION          
  ===================================================================================================================
-     Adobe Acrobat Reader                                                                      24.003.20180     
+     Adobe Acrobat Reader                                                                      24.002.20895     
      Adobe Photoshop 2020                                                                      21.0.2           
      Adobe Refresh Manager                                                                     1.8.0            
      Chromium                                                                                  111.0.5563.147   
@@ -96,7 +95,7 @@
      DevExpress Components 23.1                                                                23.1.4           
      Entity Framework 6.2.0 Tools  for Visual Studio 2022                                      6.2.0.0          
      Foxit PDF Reader                                                                          12.1.2.15332     
-     GitHub Desktop                                                                            3.4.6            
+     GitHub Desktop                                                                            3.4.2            
      Graphtec Studio                                                                           2.2.1252         
      Herramientas de corrección de Microsoft Office 2016: español                              16.0.4266.1001   
      icecap_collection_neutral                                                                 17.4.33006       
@@ -139,9 +138,9 @@
      Microsoft ASP.NET Web Tools Packages 17.0 - ENU                                           17.0.20604.0     
      Microsoft Build Tools 14.0 (x86)                                                          14.0.23107       
      Microsoft Build Tools Language Resources 14.0 (x86)                                       14.0.23107       
-     Microsoft Edge                                                                            130.0.2849.46    
-     Microsoft Edge Update                                                                     1.3.195.25       
-     Microsoft Edge WebView2 Runtime                                                           130.0.2849.46    
+     Microsoft Edge                                                                            126.0.2592.113   
+     Microsoft Edge Update                                                                     1.3.193.5        
+     Microsoft Edge WebView2 Runtime                                                           126.0.2592.113   
      Microsoft Excel MUI (English) 2016                                                        16.0.4266.1001   
      Microsoft Exchange Web Services Managed API 2.1                                           15.0.847.30      
      Microsoft Groove MUI (English) 2016                                                       16.0.4266.1001   
@@ -209,10 +208,10 @@
      Microsoft Visual C++ 2013 x86 Debug Runtime - 12.0.21005                                  12.0.21005       
      Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.40664                                12.0.40664       
      Microsoft Visual C++ 2015 x86 Debug Runtime - 14.0.23026                                  14.0.23026       
-     Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.40.33810                        14.40.33810.0    
-     Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.40.33810                        14.40.33810.0    
-     Microsoft Visual C++ 2022 X86 Additional Runtime - 14.40.33810                            14.40.33810      
-     Microsoft Visual C++ 2022 X86 Minimum Runtime - 14.40.33810                               14.40.33810      
+     Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.36.32532                        14.36.32532.0    
+     Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.36.32532                        14.36.32532.0    
+     Microsoft Visual C++ 2022 X86 Additional Runtime - 14.36.32532                            14.36.32532      
+     Microsoft Visual C++ 2022 X86 Minimum Runtime - 14.36.32532                               14.36.32532      
      Microsoft Visual Studio 2015 Shell (Isolated)                                             14.0.23107       
      Microsoft Visual Studio 2015 Shell (Isolated) Resources                                   14.0.23107       
      Microsoft Visual Studio 2015 Shell (Minimum)                                              14.0.23107       
@@ -263,8 +262,8 @@
      SSMS Post Install Tasks                                                                   19.0.20209.0     
      Telerik RadControls for WinForms Q3 2010                                                  10.3.1110.0      
      Tools for .Net 3.5                                                                        3.11.50727       
-     Trend Micro Apex One Security Agent                                                       14.0.14026       
-     UE4 Prerequisites (x64)                                                                   1.0.14.0         
+     Trend Micro Apex One Security Agent                                                       14.0.13260       
+     UE4 Prerequisites (x64)                                                                   1.0.13.0         
      Update for  (KB2504637)                                                                   1                
      Update for Skype for Business 2015 (KB4484289) 32-Bit Edition                                              
      vcpp_crt.redist.clickonce                                                                 14.34.31931      

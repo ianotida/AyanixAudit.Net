@@ -1,13 +1,11 @@
-﻿using Microsoft.Win32;
+﻿using AyanixAudit.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Management;
-using System.Runtime.InteropServices;
 using System.Data;
 using System.Linq;
-using System.Net;
-using AyanixAudit.Models;
-using System.Runtime.Remoting.Contexts;
+using System.Management;
+using System.Runtime.InteropServices;
 
 namespace AyanixAudit.Globals
 {
@@ -140,7 +138,6 @@ namespace AyanixAudit.Globals
         {
             List<PC_Software> _lst = new List<PC_Software>();
 
-            //List<string> LST = new List<string>();
             RegistryKey key;
 
             string sName = "", sVer = "";
@@ -160,11 +157,9 @@ namespace AyanixAudit.Globals
                     {
                         if (!sName.Contains("Security Update") && !sName.Contains("Update for Microsoft"))
                         {
-                            PC_Software _sf = new PC_Software
-                            {
+                            PC_Software _sf = new PC_Software {
                                 Name = sName,
-                                Version = sVer,
-                                Profile = "Local 64"
+                                Version = sVer
                             };
 
                             if(!_lst.Any(x=>x.Name == sName)) _lst.Add(_sf);
@@ -189,11 +184,9 @@ namespace AyanixAudit.Globals
                     {
                         if (!sName.Contains("Security Update") && !sName.Contains("Update for Microsoft"))
                         {
-                            PC_Software _sf = new PC_Software
-                            {
+                            PC_Software _sf = new PC_Software {
                                 Name = sName,
-                                Version = sVer,
-                                Profile = "Current User"
+                                Version = sVer
                             };
 
                             if(!_lst.Any(x=>x.Name == sName)) _lst.Add(_sf);
@@ -238,19 +231,17 @@ namespace AyanixAudit.Globals
         {
             string sResult = "";
 
-            ManagementObjectSearcher ObjSch;
-
             try
             {
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
                 sResult += Helper.PadString("   DIMM SLOT ", 45) +
-                            Helper.PadString("Maker", 17) +
-                            Helper.PadString("Size ", 15) +
-                            Helper.PadString("Speed (MHz) ", 15) +
-                            Helper.PadString("Serial No", 15) + Environment.NewLine;
+                           Helper.PadString("Maker", 17) +
+                           Helper.PadString("Size ", 15) +
+                           Helper.PadString("Speed (MHz) ", 15) +
+                           Helper.PadString("Serial No", 15) + Environment.NewLine;
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
-                ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_PhysicalMemory"));
+                ManagementObjectSearcher ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_PhysicalMemory"));
                 foreach (ManagementObject m in  ObjSch.Get())
                 {
                     sResult += Helper.PadString("     " + m["DeviceLocator"].ToString() + " - " + m["BankLabel"].ToString(),45);
@@ -277,14 +268,14 @@ namespace AyanixAudit.Globals
             try
             {
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-                sResult += Helper.PadString("   Input Device ", 62) +
+                sResult += Helper.PadString("   Input Device", 62) +
                            Helper.PadString("ID", 30) + Environment.NewLine;
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
                 wmi = new ManagementClass("Win32_KeyBoard");
                 foreach (var keyboard in wmi.GetInstances())
                 {
-                    sResult += Helper.PadString("     " +  (string)keyboard["Description"],62);
+                    sResult += Helper.PadString("     " + (string)keyboard["Description"],62);
                     sResult += Helper.PadString((string)keyboard["PNPDeviceId"],30);
                     sResult += Environment.NewLine;
                 }
@@ -301,7 +292,7 @@ namespace AyanixAudit.Globals
                 sResult += Environment.NewLine;
 
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-                sResult += Helper.PadString("   Printer Name ", 62) +
+                sResult += Helper.PadString("   Printer Name", 62) +
                            Helper.PadString("Port", 30) + Environment.NewLine;
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
@@ -313,7 +304,6 @@ namespace AyanixAudit.Globals
                     sResult += Environment.NewLine;
                 }
 
-
                 sResult += Environment.NewLine;
             }
             catch { }
@@ -323,8 +313,6 @@ namespace AyanixAudit.Globals
 
         public static string Get_Accounts(ManagementScope MScope)
         {
-            ManagementObjectSearcher ObjSch;
-
             string sResult = "";
 
             try
@@ -333,7 +321,7 @@ namespace AyanixAudit.Globals
                 sResult += Helper.PadString("   Local Users ", 62) + Environment.NewLine;
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
-                ObjSch = new ManagementObjectSearcher(MScope,  new ObjectQuery("SELECT * FROM Win32_UserAccount WHERE Domain = '" + Environment.MachineName + "' "));
+                ManagementObjectSearcher ObjSch = new ManagementObjectSearcher(MScope,  new ObjectQuery("SELECT * FROM Win32_UserAccount WHERE Domain = '" + Environment.MachineName + "' "));
                 foreach (ManagementObject m in  ObjSch.Get())
                 {
                     sResult += Helper.PadString("     " + m["Caption"].ToString(), 62)  + Environment.NewLine;
@@ -349,8 +337,6 @@ namespace AyanixAudit.Globals
         public static string Get_Graphics(ManagementScope MScope)
         {
             string sResult = "";
-            int cnt = 1;
-            ManagementObjectSearcher ObjSch;
 
             try
             {
@@ -361,7 +347,7 @@ namespace AyanixAudit.Globals
                             Helper.PadString("Date ", 20) + Environment.NewLine;    
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
-                ObjSch = new ManagementObjectSearcher(MScope,  new ObjectQuery("SELECT * FROM Win32_VideoController"));
+                ManagementObjectSearcher ObjSch = new ManagementObjectSearcher(MScope,  new ObjectQuery("SELECT * FROM Win32_VideoController"));
                 foreach (ManagementObject m in  ObjSch.Get())
                 {
                     sResult += Helper.PadString("     " + m["Caption"].ToString(), 45);
@@ -380,37 +366,6 @@ namespace AyanixAudit.Globals
                 sResult += Environment.NewLine;
             }
             catch { }
-
-            return sResult;
-        }
-
-        public static string Get_Printers(ManagementScope MScope)
-        {
-            string sResult = "";
-            int cnt = 1;
-
-            ManagementObjectSearcher ObjSch;
-
-            sResult += Helper.Title("PRINTERS");
-
-            try
-            {
-                ObjSch = new ManagementObjectSearcher(MScope,  new ObjectQuery("SELECT * FROM Win32_Printer"));
-                foreach (ManagementObject m in  ObjSch.Get())
-                {
-                    if( !m["DriverName"].ToString().Contains("Microsoft"))
-                    {
-                        sResult += Helper.PadString("   Printer " + cnt,30) + " : " + m["DriverName"].ToString() + Environment.NewLine;
-                        sResult += Helper.PadString("     Port",30) + " :   " + m["PortName"].ToString() + Environment.NewLine;
-                    }
-
-                    cnt++;
-                }
-
-                sResult += Environment.NewLine;
-            }
-            catch {  return sResult; }
-
 
             return sResult;
         }
@@ -505,13 +460,13 @@ namespace AyanixAudit.Globals
                     sResult += Helper.PadString(m["Partitions"].ToString(), 15) + Environment.NewLine ;               
                 }
 
-                sResult +=Environment.NewLine;
+                sResult += Environment.NewLine;
 
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
                 sResult +=  Helper.PadString("   DRIVES ", 45) +
-                            Helper.PadString("File System ", 17) +
-                            Helper.PadString("Total Used ", 15) +
-                            Helper.PadString("Total Capacity ", 15)  + Environment.NewLine;
+                            Helper.PadString("Used ", 17) +
+                            Helper.PadString("Capacity ", 15)  + 
+                            Helper.PadString("File System ", 15) + Environment.NewLine;
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
                 ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT * FROM Win32_LogicalDisk"));
@@ -529,10 +484,13 @@ namespace AyanixAudit.Globals
 
                         if (m["Size"] != null )
                         {
-                            sLDrv += Helper.PadString(m["FileSystem"].ToString(), 17);
-                            sLDrv += Helper.PadString(Helper.FormatSize(Convert.ToInt64(m["Size"].ToString()) - Convert.ToInt64(m["FreeSpace"].ToString())), 15);
-                            sLDrv += Helper.PadString(Helper.FormatSize(Convert.ToInt64(m["Size"].ToString())), 15);
-                        }
+                            Int64 iDSize = Convert.ToInt64(m["Size"].ToString());
+                            Int64 iDFree = Convert.ToInt64(m["FreeSpace"].ToString());
+
+							sLDrv += Helper.PadString(Helper.FormatSize(iDSize), 17);
+                            sLDrv += Helper.PadString(Helper.FormatSize(iDSize - iDFree), 15);
+							sLDrv += Helper.PadString(m["FileSystem"].ToString(), 15);
+						}
 
                         sLDrv += Environment.NewLine;
                     }
@@ -546,7 +504,7 @@ namespace AyanixAudit.Globals
                 }
 
                 sResult += sLDrv + sNDrv;
-                sResult +=Environment.NewLine;
+                sResult += Environment.NewLine;
             }
             catch { return sResult; }
 
@@ -557,13 +515,10 @@ namespace AyanixAudit.Globals
         {
             string sResult = "";
 
-            int iNameLen = 0;
-            int iVerLen = 0;
-
             List<PC_Software> _lst = Get_Softwares2().OrderBy(x => x.Name).ToList();
 
-            iNameLen = _lst.Max(x => x.Name.Length);
-            iVerLen = _lst.Max(x=>x.Version.Length);
+            int iNameLen = _lst.Max(x => x.Name.Length);
+            int iVerLen = _lst.Max(x=>x.Version.Length);
 
             sResult += Helper.Title(Helper.PadString("INSTALLED SOFTWARE", iNameLen + 4) + " " + Helper.PadString("VERSION", iVerLen + 3) );
 
