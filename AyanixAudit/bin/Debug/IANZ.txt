@@ -1,0 +1,337 @@
+ ===================================================================================================================
+  GENERAL INFORMATION
+ ===================================================================================================================
+   System Model                            : System Product Name
+   Board Model                             : TUF GAMING B550-PLUS
+   Board Serial No                         : 200569065701763
+   BIOS                                    : American Megatrends Inc. System Serial Number
+   BIOS Date                               : 2020-05-13 03:00:00
+   CPU                                     : AMD Ryzen 7 3700X 8-Core Processor             
+   CPU Cores                               : 8
+   Logical Cores                           : 16
+   Memory                                  : 32 GB
+ -------------------------------------------------------------------------------------------------------------------
+   Hostname                                : IANZ
+   User Login                              : Administrator
+   OS Domain                               : AYANIX
+   OS Installed                            : Microsoft Windows 11 Pro (64-bit) 10.0.26100
+   OS Installed Date                       : 2024-12-13 11:11:53
+
+ -------------------------------------------------------------------------------------------------------------------
+   DIMM SLOT                                                  Maker          Size             Speed (MHz)    
+ -------------------------------------------------------------------------------------------------------------------
+     DIMM_A1 - BANK 0                                         Corsair        8.00 GB          3200           
+     DIMM_A2 - BANK 1                                         Corsair        8.00 GB          3200           
+     DIMM_B1 - BANK 2                                         Corsair        8.00 GB          3200           
+     DIMM_B2 - BANK 3                                         Corsair        8.00 GB          3200           
+
+ -------------------------------------------------------------------------------------------------------------------
+   DISPLAY GPU                                                Resolution                      Version             
+ -------------------------------------------------------------------------------------------------------------------
+     NVIDIA GeForce RTX 4060                                  1920 x 1080 @ 60 Hz             32.0.15.6094        
+
+ -------------------------------------------------------------------------------------------------------------------
+   DISK                                      Size             Partitions     Type           
+ -------------------------------------------------------------------------------------------------------------------
+     [0] ST10000VN0008-2JJ101                9.10 TB          2              HDD            
+     [1] Lexar 500GB SSD                     465.76 GB        3              SSD            
+     [2] Lexar SSD NM620 2TB                 1.86 TB          1              SSD            
+
+ -------------------------------------------------------------------------------------------------------------------
+   DRIVES                                    Used             Capacity       File System    
+ -------------------------------------------------------------------------------------------------------------------
+     [1] HD OS (C:)                          332.85 GB        464.90 GB      NTFS           
+     [2] HD DATA (D:)                        921.78 GB        1.86 TB        NTFS           
+     [0] HD 10TB-1 (E:)                      3.45 TB          3.95 TB        NTFS           
+     [0] HD 10TB-2 (F:)                      3.18 TB          5.15 TB        NTFS           
+
+ -------------------------------------------------------------------------------------------------------------------
+   Input Device                                               ID                            
+ -------------------------------------------------------------------------------------------------------------------
+     HID Keyboard Device                                      HID\VID_1038&PID_184C&MI_01&COL01\A&24B93484&0&0000
+     HID Keyboard Device                                      HID\VID_1038&PID_184C&MI_00&COL02\A&11891846&0&0001
+     HID Keyboard Device                                      HID\VID_1038&PID_161C&MI_02&COL02\A&375435E8&0&0001
+     HID Keyboard Device                                      HID\VID_1038&PID_161C&MI_00&COL02\A&10F3FD6C&0&0001
+     Microsoft HID-compliant mouse                            HID\VID_1038&PID_161C&MI_03&COL02\A&EE9881F&0&0001
+     Microsoft HID-compliant mouse                            HID\VID_1038&PID_161C&MI_02&COL01\A&375435E8&0&0000
+     Microsoft HID-compliant mouse                            HID\VID_1038&PID_161C&MI_00&COL01\A&10F3FD6C&0&0000
+     Microsoft HID-compliant mouse                            HID\VID_1038&PID_184C&MI_00&COL01\A&11891846&0&0000
+
+ -------------------------------------------------------------------------------------------------------------------
+   Printer Name                                               Port                          
+ -------------------------------------------------------------------------------------------------------------------
+     Send to Microsoft OneNote 16 Driver                      nul:                          
+     Microsoft Print To PDF                                   PORTPROMPT:                   
+     Microsoft Shared Fax Driver                              SHRFAX:                       
+
+ -------------------------------------------------------------------------------------------------------------------
+   Network Adapter                                            MAC Address                   
+ -------------------------------------------------------------------------------------------------------------------
+     ExpressVPN TAP Adapter                                   00:FF:FA:11:CE:A4             
+     ExpressVPN TUN Driver                                    -NA-                          
+     Intel(R) Wi-Fi 6 AX200 160MHz                            -NA-                          
+     Realtek PCIe 2.5GbE Family Controller                    D4:5D:64:B7:98:D1             
+     Broadcom NetXtreme Gigabit Ethernet                      00:0A:F7:4C:AE:83             
+
+ -------------------------------------------------------------------------------------------------------------------
+   IP Address                                Netmask          Gateway                  MAC Address       
+ -------------------------------------------------------------------------------------------------------------------
+     10.0.3.102                              255.255.252.0                             D4:5D:64:B7:98:D1 
+     192.168.150.103                         255.255.255.0    192.168.150.254          00:0A:F7:4C:AE:83 
+
+ ===================================================================================================================
+  INSTALLED SOFTWARE                                                                           VERSION
+ ===================================================================================================================
+     Adobe Photoshop 2020                                                                      21.0.2
+     Allavsoft 3.27.9.9194                                                                     
+     AMD Chipset Software                                                                      3.10.08.506
+     AMD GPIO2 Driver                                                                          2.2.0.130
+     AMD PCI Driver                                                                            1.0.0.83
+     AMD PSP Driver                                                                            5.17.0.0
+     AMD Ryzen Balanced Driver                                                                 7.0.3.5
+     AMD SBxxx SMBus Driver                                                                    5.12.0.38
+     AMD_Chipset_Drivers                                                                       3.10.08.506
+     CapCut                                                                                    3.6.0.1318
+     Chromium                                                                                  125.0.6422.60
+     ClickOnce Bootstrapper Package for Microsoft .NET Framework                               4.8.09256
+     Command & Conquer™ Red Alert™ 3                                                           1.0.1.0
+     Discord                                                                                   1.0.9015
+     Entity Framework 6.2.0 Tools  for Visual Studio 2019                                      6.2.0.0
+     Entity Framework 6.5.0 Tools  for Visual Studio 2022                                      6.5.0.0
+     ExpressVPN                                                                                12.88.0.36
+     Foxit PDF Reader                                                                          11.0.1.49938
+     GitHub Desktop                                                                            3.4.18
+     icecap_collection_neutral                                                                 16.10.31306
+     icecap_collectionresources                                                                17.13.35716
+     icecap_collectionresourcesx64                                                             16.10.31306
+     Integration Services                                                                      15.0.2000.168
+     Intel(R) Wireless Bluetooth(R)                                                            22.80.1.1
+     IntelliTraceProfilerProxy                                                                 15.0.21225.01
+     iVMS-4200 Lite(v1.0.0.4)                                                                  1.0.0.4
+     Java 8 Update 441                                                                         8.0.4410.7
+     Java Auto Updater                                                                         2.8.441.7
+     Kits Configuration Installer                                                              10.1.19041.685
+     K-Lite Codec Pack 18.2.0 Full                                                             18.2.0
+     Microsoft .NET Core Host - 3.1.32 (x86)                                                   24.192.31915
+     Microsoft .NET Core Host FX Resolver - 3.1.32 (x86)                                       24.192.31915
+     Microsoft .NET Core Runtime - 3.1.32 (x86)                                                24.192.31915
+     Microsoft .NET Core SDK 3.1.426 (x64)                                                     3.1.426.16244
+     Microsoft .NET Framework 4 Multi-Targeting Pack                                           4.0.30319
+     Microsoft .NET Framework 4.5 Multi-Targeting Pack                                         4.5.50710
+     Microsoft .NET Framework 4.5.2 Multi-Targeting Pack                                       4.5.51651
+     Microsoft .NET Framework 4.5.2 Multi-Targeting Pack (ENU)                                 4.5.51209
+     Microsoft .NET Framework 4.6 Targeting Pack                                               4.6.00081
+     Microsoft .NET Framework 4.6.1 Targeting Pack                                             4.6.01055
+     Microsoft .NET Framework 4.6.2 Targeting Pack                                             4.6.01590
+     Microsoft .NET Framework 4.6.2 Targeting Pack (ENU)                                       4.6.01590
+     Microsoft .NET Framework 4.7 Targeting Pack                                               4.7.02053
+     Microsoft .NET Framework 4.7 Targeting Pack (ENU)                                         4.7.02053
+     Microsoft .NET Framework 4.7.1 Doc Redirected Targeting Pack (ENU)                        4.7.02558
+     Microsoft .NET Framework 4.7.1 Targeting Pack                                             4.7.02558
+     Microsoft .NET Framework 4.7.2 Targeting Pack                                             4.7.03062
+     Microsoft .NET Framework 4.7.2 Targeting Pack (ENU)                                       4.7.03062
+     Microsoft .NET Framework 4.8 SDK                                                          4.8.03928
+     Microsoft .NET Framework 4.8 Targeting Pack                                               4.8.03761
+     Microsoft .NET Framework 4.8 Targeting Pack (ENU)                                         4.8.03761
+     Microsoft .NET Framework Cumulative Intellisense Pack for Visual Studio (ENU)             4.8.09037
+     Microsoft .NET Host - 5.0.17 (x86)                                                        40.68.31213
+     Microsoft .NET Host - 6.0.36 (x86)                                                        48.144.23141
+     Microsoft .NET Host - 9.0.4 (x86)                                                         72.16.31125
+     Microsoft .NET Host FX Resolver - 5.0.17 (x86)                                            40.68.31213
+     Microsoft .NET Host FX Resolver - 6.0.36 (x86)                                            48.144.23141
+     Microsoft .NET Host FX Resolver - 9.0.4 (x86)                                             72.16.31125
+     Microsoft .NET Runtime - 5.0.17 (x86)                                                     40.68.31213
+     Microsoft .NET Runtime - 6.0.36 (x86)                                                     48.144.23141
+     Microsoft .NET Runtime - 7.0.20 (x64)                                                     7.0.20.33717
+     Microsoft .NET Runtime - 7.0.20 (x86)                                                     56.80.15184
+     Microsoft .NET Runtime - 8.0.15 (x86)                                                     64.60.31149
+     Microsoft .NET Runtime - 9.0.4 (x86)                                                      72.16.31125
+     Microsoft .NET SDK 6.0.321 (x64)                                                          6.3.2123.60531
+     Microsoft .NET Targeting Pack - 6.0.36 (x86)                                              48.144.23141
+     Microsoft .NET Targeting Pack - 7.0.20 (x86)                                              56.80.15184
+     Microsoft .NET Targeting Pack - 8.0.15 (x86)                                              64.60.31149
+     Microsoft .NET Targeting Pack - 9.0.4 (x86)                                               72.16.31125
+     Microsoft Analysis Services OLE DB Provider                                               15.0.2000.832
+     Microsoft ASP.NET Core 3.1.32 - Shared Framework (x86)                                    3.1.32.22566
+     Microsoft ASP.NET Core 3.1.32 Shared Framework (x86)                                      3.1.32.22566
+     Microsoft ASP.NET Core 5.0.17 - Shared Framework (x64)                                    5.0.17.22215
+     Microsoft ASP.NET Core 5.0.17 - Shared Framework (x86)                                    5.0.17.22215
+     Microsoft ASP.NET Core 5.0.17 Shared Framework (x86)                                      5.0.17.22215
+     Microsoft ASP.NET Core 6.0.36 - Shared Framework (x86)                                    6.0.36.24516
+     Microsoft ASP.NET Core 6.0.36 Shared Framework (x86)                                      6.0.36.24516
+     Microsoft ASP.NET Core 6.0.36 Targeting Pack (x86)                                        6.0.36.24516
+     Microsoft ASP.NET Core 7.0.20 Shared Framework (x86)                                      7.0.20.24269
+     Microsoft ASP.NET Core 7.0.20 Targeting Pack (x86)                                        7.0.20.24269
+     Microsoft ASP.NET Core 8.0.15 Shared Framework (x86)                                      8.0.15.25165
+     Microsoft ASP.NET Core 8.0.15 Targeting Pack (x86)                                        8.0.15.25165
+     Microsoft ASP.NET Core 9.0.4 Shared Framework (x86)                                       9.0.4.25164
+     Microsoft ASP.NET Core 9.0.4 Targeting Pack (x86)                                         9.0.4.25164
+     Microsoft ASP.NET Diagnostic Pack for Visual Studio                                       17.13.124.35287
+     Microsoft ASP.NET Packages for MVC 4 - ENU                                                17.0.40305.0
+     Microsoft ASP.NET Web Tools Packages 16.0 - ENU                                           1.0.21125.0
+     Microsoft ASP.NET Web Tools Packages 17.0 - ENU                                           17.0.40305.0
+     Microsoft Edge                                                                            135.0.3179.73
+     Microsoft Edge Dev                                                                        136.0.3240.8
+     Microsoft Edge WebView2 Runtime                                                           135.0.3179.73
+     Microsoft GameInput                                                                       10.1.22621.3036
+     Microsoft Help Viewer 2.3                                                                 2.3.28307
+     Microsoft NetStandard SDK                                                                 15.0.51105
+     Microsoft Office 2007 Service Pack 3 (SP3)                                                
+     Microsoft Office Access MUI (English) 2007                                                12.0.6612.1000
+     Microsoft Office Access Setup Metadata MUI (English) 2007                                 12.0.6612.1000
+     Microsoft Office Enterprise 2007                                                          12.0.6612.1000
+     Microsoft Office Excel MUI (English) 2007                                                 12.0.6612.1000
+     Microsoft Office File Validation Add-In                                                   14.0.5130.5003
+     Microsoft Office Groove MUI (English) 2007                                                12.0.6612.1000
+     Microsoft Office Groove Setup Metadata MUI (English) 2007                                 12.0.6612.1000
+     Microsoft Office InfoPath MUI (English) 2007                                              12.0.6612.1000
+     Microsoft Office OneNote MUI (English) 2007                                               12.0.6612.1000
+     Microsoft Office Outlook MUI (English) 2007                                               12.0.6612.1000
+     Microsoft Office PowerPoint MUI (English) 2007                                            12.0.6612.1000
+     Microsoft Office Proof (English) 2007                                                     12.0.6612.1000
+     Microsoft Office Proof (French) 2007                                                      12.0.6612.1000
+     Microsoft Office Proof (Spanish) 2007                                                     12.0.6612.1000
+     Microsoft Office Proofing (English) 2007                                                  12.0.4518.1014
+     Microsoft Office Proofing Tools 2007 Service Pack 3 (SP3)                                 
+     Microsoft Office Publisher MUI (English) 2007                                             12.0.6612.1000
+     Microsoft Office Shared MUI (English) 2007                                                12.0.6612.1000
+     Microsoft Office Shared Setup Metadata MUI (English) 2007                                 12.0.6612.1000
+     Microsoft Office Word MUI (English) 2007                                                  12.0.6612.1000
+     Microsoft Portable Library Multi-Targeting Pack                                           17.0.35716.53
+     Microsoft Portable Library Multi-Targeting Pack Language Pack - enu                       17.0.35716.53
+     Microsoft SQL Server Management Studio - 18.11                                            15.0.18404.0
+     Microsoft TestPlatform SDK Local Feed                                                     17.10.0.9037153
+     Microsoft Visual C++ 2005 Redistributable                                                 8.0.61001
+     Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.17                              9.0.30729
+     Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148                            9.0.30729.4148
+     Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161                            9.0.30729.6161
+     Microsoft Visual C++ 2010  x86 Redistributable - 10.0.40219                               10.0.40219
+     Microsoft Visual C++ 2012 Redistributable (x64) - 11.0.61030                              11.0.61030.0
+     Microsoft Visual C++ 2012 Redistributable (x86) - 11.0.61030                              11.0.61030.0
+     Microsoft Visual C++ 2012 x86 Additional Runtime - 11.0.61030                             11.0.61030
+     Microsoft Visual C++ 2012 x86 Minimum Runtime - 11.0.61030                                11.0.61030
+     Microsoft Visual C++ 2013 Redistributable (x64) - 12.0.30501                              12.0.30501.0
+     Microsoft Visual C++ 2013 Redistributable (x64) - 12.0.40660                              12.0.40660.0
+     Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.30501                              12.0.30501.0
+     Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.40660                              12.0.40660.0
+     Microsoft Visual C++ 2013 x86 Additional Runtime - 12.0.40660                             12.0.40660
+     Microsoft Visual C++ 2013 x86 Minimum Runtime - 12.0.40660                                12.0.40660
+     Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.42.34438                        14.42.34438.0
+     Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.42.34438                        14.42.34438.0
+     Microsoft Visual C++ 2022 X86 Additional Runtime - 14.42.34438                            14.42.34438
+     Microsoft Visual C++ 2022 X86 Debug Runtime - 14.42.34438                                 14.42.34438
+     Microsoft Visual C++ 2022 X86 Minimum Runtime - 14.42.34438                               14.42.34438
+     Microsoft Visual Studio Code (User)                                                       1.90.2
+     Microsoft Visual Studio Setup Configuration                                               3.12.2140.44225
+     Microsoft Visual Studio Setup WMI Provider                                                3.12.2140.44225
+     Microsoft Visual Studio Tools for Applications 2017                                       15.0.26717
+     Microsoft Visual Studio Tools for Applications 2017 x86 Hosting Support                   15.0.26717
+     Microsoft Windows Desktop Runtime - 3.1.32 (x86)                                          24.192.31915
+     Microsoft Windows Desktop Runtime - 5.0.17 (x64)                                          5.0.17.31219
+     Microsoft Windows Desktop Runtime - 5.0.17 (x86)                                          5.0.17.31219
+     Microsoft Windows Desktop Runtime - 6.0.36 (x86)                                          48.144.23186
+     Microsoft Windows Desktop Runtime - 7.0.20 (x86)                                          56.80.15245
+     Microsoft Windows Desktop Runtime - 8.0.15 (x86)                                          64.60.31203
+     Microsoft Windows Desktop Runtime - 9.0.4 (x86)                                           72.16.31142
+     Microsoft Windows Desktop Targeting Pack - 6.0.36 (x86)                                   48.144.23186
+     Microsoft Windows Desktop Targeting Pack - 7.0.20 (x86)                                   56.80.15245
+     Microsoft Windows Desktop Targeting Pack - 8.0.15 (x86)                                   64.60.31203
+     Microsoft Windows Desktop Targeting Pack - 9.0.4 (x86)                                    72.16.31142
+     MSI Development Tools                                                                     10.1.19041.685
+     MSVCRT Redists                                                                            1.0
+     OBS Studio                                                                                31.0.2
+     Popcap Game Collection                                                                    1.00.0000
+     Promontory_GPIO Driver                                                                    2.0.1.0
+     qBittorrent                                                                               5.0.4
+     REAL Video Enhancer                                                                       "2.2.5"
+     Realtek Audio Driver                                                                      6.0.9071.1
+     Realtek Ethernet Controller Driver                                                        11.10.0720.2022
+     SAP Crystal Reports, version for Microsoft Visual Studio                                  13.0.28.3597
+     SDK ARM Additions                                                                         10.1.19041.685
+     SDK ARM Redistributables                                                                  10.1.19041.685
+     Steam                                                                                     2.10.91.91
+     Thorium                                                                                   130.0.6723.174
+     UE4 Prerequisites (x64)                                                                   1.0.14.0
+     Universal CRT Extension SDK                                                               10.1.19041.685
+     Universal CRT Headers Libraries and Sources                                               10.1.19041.685
+     Universal CRT Redistributable                                                             10.1.19041.685
+     Universal CRT Tools x86                                                                   10.1.19041.685
+     Universal General MIDI DLS Extension SDK                                                  10.1.19041.685
+     Update for  (KB2504637)                                                                   1
+     Update for 2007 Microsoft Office System (KB967642)                                        
+     vcpp_crt.redist.clickonce                                                                 14.42.34438
+     Visual Studio 2017 Isolated Shell for SSMS                                                15.0.28307.421
+     Visual Studio Community 2022                                                              17.13.6
+     Visual Studio Enterprise 2019                                                             16.11.46
+     VS Immersive Activate Helper                                                              17.0.157.0
+     vs_clickoncebootstrappermsi                                                               17.13.35716
+     vs_clickoncebootstrappermsires                                                            17.13.35716
+     vs_clickoncesigntoolmsi                                                                   17.13.35710
+     vs_communitymsires                                                                        17.13.35716
+     vs_communitysharedmsi                                                                     17.13.35716
+     vs_CoreEditorFonts                                                                        17.6.33605
+     vs_devenvmsi                                                                              16.0.28329
+     vs_devenvsharedmsi                                                                        17.13.35710
+     vs_filehandler_amd64                                                                      17.13.35716
+     vs_filehandler_x86                                                                        17.13.35716
+     vs_FileTracker_Singleton                                                                  17.13.35716
+     vs_githubprotocolhandlermsi                                                               17.13.35710
+     vs_Graphics_Singletonx86                                                                  17.13.35716
+     vs_minshellinteropsharedmsi                                                               17.13.35716
+     vs_minshellmsi                                                                            16.11.34902
+     vs_minshellmsires                                                                         17.13.35716
+     vs_minshellsharedmsi                                                                      17.13.35716
+     vs_SQLClickOnceBootstrappermsi                                                            17.13.35710
+     vs_tipsmsi                                                                                17.13.35710
+     vs_vswebprotocolselectormsi                                                               17.13.35710
+     Winamp                                                                                    5.92.0
+     WinAppDeploy                                                                              10.1.19041.685
+     Windows App Certification Kit SupportedApiList x86                                        10.1.19041.685
+     Windows App Certification Kit x64                                                         10.1.19041.685
+     Windows Desktop Extension SDK                                                             10.1.19041.685
+     Windows Desktop Extension SDK Contracts                                                   10.1.19041.685
+     Windows IoT Extension SDK                                                                 10.1.19041.685
+     Windows IoT Extension SDK Contracts                                                       10.1.19041.685
+     Windows Mobile Extension SDK                                                              10.1.19041.685
+     Windows Mobile Extension SDK Contracts                                                    10.1.19041.685
+     Windows SDK                                                                               10.1.19041.685
+     Windows SDK AddOn                                                                         10.1.0.0
+     Windows SDK ARM Desktop Tools                                                             10.1.19041.685
+     Windows SDK Desktop Headers arm                                                           10.1.19041.685
+     Windows SDK Desktop Headers arm64                                                         10.1.19041.685
+     Windows SDK Desktop Headers x64                                                           10.1.19041.685
+     Windows SDK Desktop Headers x86                                                           10.1.19041.685
+     Windows SDK Desktop Libs arm                                                              10.1.19041.685
+     Windows SDK Desktop Libs arm64                                                            10.1.19041.685
+     Windows SDK Desktop Libs x64                                                              10.1.19041.685
+     Windows SDK Desktop Libs x86                                                              10.1.19041.685
+     Windows SDK Desktop Tools arm64                                                           10.1.19041.685
+     Windows SDK Desktop Tools x64                                                             10.1.19041.685
+     Windows SDK Desktop Tools x86                                                             10.1.19041.685
+     Windows SDK DirectX x86 Remote                                                            10.1.19041.685
+     Windows SDK EULA                                                                          10.1.19041.685
+     Windows SDK Facade Windows WinMD Versioned                                                10.1.19041.685
+     Windows SDK for Windows Store Apps                                                        10.1.19041.685
+     Windows SDK for Windows Store Apps Contracts                                              10.1.19041.685
+     Windows SDK for Windows Store Apps DirectX x86 Remote                                     10.1.19041.685
+     Windows SDK for Windows Store Apps Headers                                                10.1.19041.685
+     Windows SDK for Windows Store Apps Libs                                                   10.1.19041.685
+     Windows SDK for Windows Store Apps Metadata                                               10.1.19041.685
+     Windows SDK for Windows Store Apps Tools                                                  10.1.19041.685
+     Windows SDK for Windows Store Managed Apps Libs                                           10.1.19041.685
+     Windows SDK Modern Non-Versioned Developer Tools                                          10.1.19041.685
+     Windows SDK Modern Versioned Developer Tools                                              10.1.19041.685
+     Windows SDK Redistributables                                                              10.1.19041.685
+     Windows SDK Signing Tools                                                                 10.1.19041.685
+     Windows Software Development Kit - Windows 10.0.19041.685                                 10.1.19041.685
+     Windows Team Extension SDK                                                                10.1.19041.685
+     Windows Team Extension SDK Contracts                                                      10.1.19041.685
+     WinRT Intellisense Desktop - en-us                                                        10.1.19041.685
+     WinRT Intellisense Desktop - Other Languages                                              10.1.19041.685
+     WinRT Intellisense IoT - en-us                                                            10.1.19041.685
+     WinRT Intellisense IoT - Other Languages                                                  10.1.19041.685
+     WinRT Intellisense Mobile - en-us                                                         10.1.19041.685
+     WinRT Intellisense PPI - en-us                                                            10.1.19041.685
+     WinRT Intellisense PPI - Other Languages                                                  10.1.19041.685
+     WinRT Intellisense UAP - en-us                                                            10.1.19041.685
+     WinRT Intellisense UAP - Other Languages                                                  10.1.19041.685

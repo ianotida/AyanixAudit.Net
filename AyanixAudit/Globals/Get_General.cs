@@ -128,9 +128,8 @@ namespace AyanixAudit.Globals
 
             ManagementClass wmi;
 
-
             wmi = new ManagementClass("Win32_Printer");
-            foreach (var m in wmi.GetInstances())
+            foreach (ManagementObject m in wmi.GetInstances())
             {
                 if (m["DriverName"] !=null )
                 {
@@ -398,21 +397,19 @@ namespace AyanixAudit.Globals
                 ManagementClass wmi;
 
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-                sResult += Helper.PadString("   DIMM SLOT ", 45) +
-                           Helper.PadString("Maker", 17) +
-                           Helper.PadString("Size ", 15) +
-                           Helper.PadString("Speed (MHz) ", 15) +
-                           Helper.PadString("Serial No", 15) + Environment.NewLine;
+                sResult += Helper.PadString("   DIMM SLOT ", 62) +
+                           Helper.PadString("Maker", 15) +
+                           Helper.PadString("Size ", 17) +
+                           Helper.PadString("Speed (MHz) ", 15)  + Environment.NewLine;
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
                 wmi = new ManagementClass("Win32_PhysicalMemory");
                 foreach  (var m in wmi.GetInstances())
                 {
-                    sResult += Helper.PadString("     " + m["DeviceLocator"].ToString() + " - " + m["BankLabel"].ToString(),45);
-                    sResult += Helper.PadString(m["Manufacturer"].ToString(), 17);
-                    sResult += Helper.PadString(Helper.ToSize((ulong)m["Capacity"]), 15);
-                    sResult += Helper.PadString(m["Speed"].ToString(), 15);
-                    sResult += Helper.PadString(m["SerialNumber"].ToString(), 15) + Environment.NewLine ;        
+                    sResult += Helper.PadString("     " + m["DeviceLocator"].ToString() + " - " + m["BankLabel"].ToString(), 62);
+                    sResult += Helper.PadString(m["Manufacturer"].ToString(), 15);
+                    sResult += Helper.PadString(Helper.ToSize((ulong)m["Capacity"]), 17);
+                    sResult += Helper.PadString(m["Speed"].ToString(), 15) + Environment.NewLine ;        
                 }
 
                 sResult +=Environment.NewLine;
@@ -510,16 +507,15 @@ namespace AyanixAudit.Globals
                 ManagementClass wmi;
 
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-                sResult +=  Helper.PadString("   DISPLAY GPU ", 45) +
+                sResult +=  Helper.PadString("   DISPLAY GPU ", 62) +
                             Helper.PadString("Resolution ", 32) +
-                            Helper.PadString("Version ", 20) +
-                            Helper.PadString("Date ", 20) + Environment.NewLine;    
+                            Helper.PadString("Version ", 20)  + Environment.NewLine;    
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
                 wmi = new ManagementClass("Win32_VideoController");
                 foreach  (var m in wmi.GetInstances())
                 {
-                    sResult += Helper.PadString("     " + m["Caption"].ToString(), 45);
+                    sResult += Helper.PadString("     " + m["Caption"].ToString(), 62);
 
                     if (m["CurrentHorizontalResolution"] != null)
                     {
@@ -528,7 +524,7 @@ namespace AyanixAudit.Globals
                                                     m["CurrentRefreshRate"].ToString() + " Hz" ,32);
 
                         sResult += Helper.PadString(m["DriverVersion"].ToString(), 20);
-                        sResult += Helper.PadString(ManagementDateTimeConverter.ToDateTime(m["DriverDate"].ToString()).ToString(sDateFormat) , 20) + Environment.NewLine ;        
+                        sResult += Environment.NewLine ;        
                     }
                 }
 
@@ -550,7 +546,7 @@ namespace AyanixAudit.Globals
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
                 sResult += Helper.PadString("   IP Address ", 45) +
                               Helper.PadString("Netmask ", 17) +
-                              Helper.PadString("Gateway ", 18) +
+                              Helper.PadString("Gateway ", 25) +
                               Helper.PadString("MAC Address ", 18) + Environment.NewLine;
                 sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
               
@@ -569,7 +565,7 @@ namespace AyanixAudit.Globals
                     {
                         sResult += Helper.PadString("     " + arr_IP[i], 45) +
                                    Helper.PadString(arr_Sub[i], 17) +
-                                   Helper.PadString(sIPGateway, 18) +
+                                   Helper.PadString(sIPGateway, 25) +
                                    Helper.PadString(m["MACAddress"].ToString(), 18) + Environment.NewLine;
                     }
                 }
@@ -653,15 +649,14 @@ namespace AyanixAudit.Globals
 
             List<PC_Software> _lst = Get_Softwares2().OrderBy(x => x.Name).ToList();
 
-            int iNameLen = _lst.Max(x => x.Name.Length);
-            int iVerLen = _lst.Max(x=>x.Version.Length);
-
-            sResult += Helper.Title(Helper.PadString("INSTALLED SOFTWARE", iNameLen + 4) + " " + Helper.PadString("VERSION", iVerLen + 3) );
+            //int iNameLen = _lst.Max(x => x.Name.Length);
+            //int iVerLen = _lst.Max(x=>x.Version.Length);
+            sResult += Helper.Title(Helper.PadString("INSTALLED SOFTWARE", 93) + "VERSION");
 
             foreach (PC_Software sf in _lst )
             {
-                sResult += Helper.PadString("     " + sf.Name , iNameLen + 6) + " " + 
-                           Helper.PadString( sf.Version , iVerLen + 3) + Environment.NewLine;
+                sResult += Helper.PadString("     " + sf.Name , 95) + sf.Version + Environment.NewLine;
+				//Helper.PadString( sf.Version , iVerLen + 3)
             }
             
             return sResult;

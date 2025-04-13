@@ -187,7 +187,6 @@ namespace AyanixAudit
 					//}
 
 
-
 					List<PC_Drive> lst_drives = Globals.Get_WMI.Get_Volumes();
 					sResult += Globals.Get_WMI.Get_Drives(lst_drives);
 
@@ -260,7 +259,6 @@ namespace AyanixAudit
 
 					//sResult += Environment.NewLine;
 
-
 				}
 				catch (Exception ex)
 				{
@@ -269,32 +267,31 @@ namespace AyanixAudit
 					File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + "_errors.txt", txtStatus.Text);
 				}
 
-
-
                 Delegate_Msg(" * Getting Input Information...");
 
 				try
 				{
-					List<PC_Devices> lst_devices = new List<PC_Devices>();
-
-					lst_devices = Globals.Get_WMI.Get_Inputs();
+					//List<PC_Devices> lst_devices = new List<PC_Devices>();
+					ManagementClass wmi;
 
 					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 					sResult += Helper.PadString("   Input Device", 62) +
 								   Helper.PadString("ID", 30) + Environment.NewLine;
 					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
-					foreach (PC_Devices dev in lst_devices)
+					wmi = new ManagementClass("Win32_KeyBoard");
+					foreach (var kyb in wmi.GetInstances())
 					{
-						sResult += Helper.PadString("     " + dev.Name, 62);
-						sResult += Helper.PadString(dev.DevID, 30);
+						sResult += Helper.PadString("     " + kyb["Description"].ToString(), 62);
+						sResult += Helper.PadString(kyb["PNPDeviceId"].ToString(), 30);
 						sResult += Environment.NewLine;
 					}
 
-					foreach (PC_Devices dev in lst_devices)
+					wmi = new ManagementClass("Win32_PointingDevice");
+					foreach (var mse in wmi.GetInstances())
 					{
-						sResult += Helper.PadString("     " + dev.Name, 62);
-						sResult += Helper.PadString(dev.DevID, 30);
+						sResult += Helper.PadString("     " + mse["Manufacturer"].ToString() + " " + mse["Caption"].ToString(), 62);
+						sResult += Helper.PadString(mse["PNPDeviceId"].ToString(), 30);
 						sResult += Environment.NewLine;
 					}
 				}
@@ -310,7 +307,7 @@ namespace AyanixAudit
 
 				try
 				{
-					List<PC_Devices> lst_devices = Globals.Get_WMI.Get_Printers();
+					ManagementClass wmi;
 
 					sResult += Environment.NewLine;
 					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
@@ -318,17 +315,17 @@ namespace AyanixAudit
 							   Helper.PadString("Port", 30) + Environment.NewLine;
 					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 
-					foreach (PC_Devices dev in lst_devices)
+					wmi = new ManagementClass("Win32_Printer");
+					foreach (var prn in wmi.GetInstances())
 					{
-						sResult += Helper.PadString("     " + dev.Name, 62);
-						sResult += Helper.PadString(dev.DevID, 30);
+						sResult += Helper.PadString("     " + prn["DriverName"].ToString(), 62);
+						sResult += Helper.PadString(prn["PortName"].ToString(), 30);
 						sResult += Environment.NewLine;
 					}
 				}
 				catch (Exception ex)
 				{
 					Delegate_Msg(" Error : " + ex.Message);
-
 					File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + "_errors.txt", txtStatus.Text);
 				}
 
@@ -368,13 +365,11 @@ namespace AyanixAudit
                 Delegate_Msg(" * Getting Software Installed...");
                 sResult += Globals.Get_WMI.Get_Softwares();
 
-
 				_pcinfo = Globals.Get_WMI._pc;
 
 				Delegate_Msg(" * Saving Data...");
-				try
-                {
-                    File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + "_" + Environment.UserName + ".txt" , sResult);
+				try{
+                    File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + ".txt" , sResult);
                 }
                 catch(Exception){}
 
@@ -392,7 +387,7 @@ namespace AyanixAudit
 						if (bUpload)
 						{
 							Delegate_Msg(" * Update Completed.");
-						}						
+						}
 					}
 					else
 					{
@@ -405,20 +400,9 @@ namespace AyanixAudit
 					Thread.Sleep(1000);
 				}
 
-				//try
-				//{
-				//    File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + "_" + Environment.UserName + ".txt" , sResult);
-				//}
-				//catch(Exception x)
-				//{
-				//    MessageBox.Show(x.Message, "Error Saving..", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				//}
-
 				Thread.Sleep(1000);
 
                 Delegate_Msg(sResult,true);
-
-
             });
 
             T.Start();
