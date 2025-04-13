@@ -5,8 +5,9 @@ using System.Text;
 
 namespace AyanixAudit.Models
 {
-    public class PCInfo
+    public class PC_Info
     {
+        public string Board_Maker { get; set; }
         public string Board_Model { get; set; }
         public string Board_Serial { get; set; }
         public string BIOS_Maker { get; set; }
@@ -23,30 +24,32 @@ namespace AyanixAudit.Models
         public string OS_InstallDate { get; set; }
         public string OS_Domain{ get; set; }
         public string OS_User { get; set; }
+        public string OS_DiskType { get; set; }
+        public string OS_DiskSize { get; set; }
+        public int OS_DiskIndex { get; set; }
     }
 
     public class PC_Devices
     {
         public string Name { get; set; }
         public string Type { get; set; }
-        public string DeviceID { get; set;}
+        public string DevID { get; set;}
     }
 
-    public class PC_Disk
-    {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Size { get; set; }
-        public string Partition { get; set; }
-    }
 
     public class PC_Drive
     {
+        public int Index { get; set; }
+        public string Letter { get; set; }
         public string Name { get; set; }
-        public string File_System { get; set; }
-        public string Total_Free { get; set; }
-        public string Total_Used { get; set; }
-        public string Total_Capacity { get; set; }
+        public string Type { get; set; }
+        public string FileSystem { get; set; }
+        public string Partition { get; set; }
+        public ulong Size_U64 { get; set; }
+        public string Size { get; set; }
+        public string Free { get; set; }
+        public string Used { get; set; }
+        public string DevType { get; set; }
     }
 
     public class PC_Software
@@ -56,12 +59,12 @@ namespace AyanixAudit.Models
         public string Profile { get; set; }
     }
 
-    public class PC_Network
+    public class PC_Net
     {
-        public string MAC_Address { get; set; }
+        public string Name { get; set; }
         public string IP_Address { get; set; }
-        public string IP_Subnet { get; set;}
+        public string IP_Mask { get; set;}
         public string Gateway { get; set; }
-        public string Adapter { get; set; }
+        public string MAC_Address { get; set; }
     }
 }

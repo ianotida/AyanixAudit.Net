@@ -8,7 +8,7 @@ namespace AyanixAudit
         {
             string sResult = "";
 
-            sResult =  " ===================================================================================================================" + Environment.NewLine;
+            sResult = " ===================================================================================================================" + Environment.NewLine;
             sResult += "  " + sTitle + Environment.NewLine;
             sResult += " ===================================================================================================================" + Environment.NewLine;
 
@@ -28,9 +28,37 @@ namespace AyanixAudit
             long bytes = Math.Abs(byteCount);
             int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
             double num = Math.Round(bytes / Math.Pow(1024, place), 1);
+            double size = (Math.Sign(byteCount) * num);
 
-            return (Math.Sign(byteCount) * num).ToString() + suf[place];
-        }      
+            string sSize = size.ToString() + suf[place];
+
+            if(suf[place] == " GB")
+            {
+                if (size > 400 && size < 600) sSize = "500 GB";
+                if (size > 900 ) sSize = "1 TB";
+            }
+
+            if(suf[place] == " TB")
+            {
+                if (size > 1.5 ) sSize = "2 TB";
+                if (size > 3.5 ) sSize = "4 TB";
+            }
+
+            return sSize;
+        }
+
+        public static string ToSize(ulong bytes)
+        {
+            ulong unit = 1024;
+            if (bytes < unit) { return $"{bytes} B"; }
+
+            var exp = (int)(Math.Log(bytes) / Math.Log(unit));
+            return $"{bytes / Math.Pow(unit, exp):F2} {("KMGTPE")[exp - 1]}B";
+        }
+
+
+
 
     }
+
 }
