@@ -595,13 +595,14 @@ namespace AyanixAudit.Globals
 
         public static List<PC_Drive> Get_DrivesV2()
         {
-            string sBookDisk = "";
+            //string sBookDisk = "";
 
-			ManagementClass wmi = new ManagementClass("Win32_DiskPartition");
-			foreach (var m in wmi.GetInstances())
-			{
-				if ((bool)m["Bootable"]) sBookDisk = m["DiskIndex"].ToString();
-			}
+			//ManagementClass wmi = new ManagementClass("Win32_DiskPartition");
+			//foreach (var m in wmi.GetInstances())
+			//{
+			//	if ((bool)m["Bootable"] && 
+   //                       m["Description"].ToString() != "Unknown") sBookDisk = m["DiskIndex"].ToString();
+			//}
 
             List<PC_Drive> _lst = new List<PC_Drive>();
 
@@ -613,19 +614,8 @@ namespace AyanixAudit.Globals
             foreach (ManagementObject d in ObjSch.Get())
             {
                 int iDiskIndex = Convert.ToInt32(d["Index"].ToString());
-
-                _lst.Add(new PC_Drive
-                {
-                    Type = "Disk",
-                    Index = iDiskIndex,
-                    Name = d["Caption"].ToString(),
-                    Size_U64 = (ulong)d["Size"],
-                    Size = Helper.ToSize((ulong)d["Size"]),
-                    Partition = d["Partitions"].ToString(),
-
-                    Boot = iDiskIndex.ToString() == sBookDisk ? 1 : 0,
-                    DevType = d["Caption"].ToString().Contains("SSD") ? "SSD" : "HDD"
-                });
+                int iBoot = 0;
+ 
 
                 var PatQueryText = string.Format("associators of {{{0}}} where AssocClass = Win32_DiskDriveToDiskPartition", d.Path.RelativePath);
                 var PatQuery = new ManagementObjectSearcher(PatQueryText);
@@ -664,6 +654,8 @@ namespace AyanixAudit.Globals
                                 _drv.Used = Helper.ToSize(((ulong)ld["Size"] - (ulong)ld["FreeSpace"]));
                                 _lst.Add(_drv);
                             }
+
+                            if (_drv.Letter == "C") iBoot = 1;
                         }
 
                         if (iDType == 4 || iDType > 5)
@@ -680,9 +672,22 @@ namespace AyanixAudit.Globals
                                 Used = ""
                             });
                         }
-
                     }
                 }
+            
+                _lst.Add(new PC_Drive
+                {
+                    Type = "Disk",
+                    Index = iDiskIndex,
+                    Name = d["Caption"].ToString(),
+                    Size_U64 = (ulong)d["Size"],
+                    Size = Helper.ToSize((ulong)d["Size"]),
+                    Partition = d["Partitions"].ToString(),
+                    Boot = iBoot,
+                    DevType = d["Caption"].ToString().Contains("SSD") ? "SSD" : "HDD"
+                });           
+            
+            
             }
 
             return _lst;
