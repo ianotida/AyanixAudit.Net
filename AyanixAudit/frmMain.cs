@@ -40,16 +40,16 @@ namespace AyanixAudit
             Thread T = new Thread(() =>
             {
                 string sResult = "";
+				string sFileName = Environment.MachineName + "_" + Environment.UserName;
 
                 ConnectionOptions ConOpt = new ConnectionOptions { Impersonation = ImpersonationLevel.Impersonate};
 				ManagementScope MScope = new ManagementScope("\\\\.\\root\\cimv2", ConOpt);
                 MScope.Connect();
 
+				ManagementClass wmi;
+
                 Delegate_Msg(" * Getting Board Information...");
                 sResult += Globals.Get_WMI.Get_Board();
-
-                //Delegate_Msg(" * Getting Users Information...");
-                //sResult += Globals.Get_WMI.Get_Accounts(MScope);
 
                 Delegate_Msg(" * Getting RAM Information...");
                 sResult += Globals.Get_WMI.Get_RAM();
@@ -57,223 +57,26 @@ namespace AyanixAudit
                 Delegate_Msg(" * Getting Display Information...");
                 sResult += Globals.Get_WMI.Get_Graphics();
 
-
                 Delegate_Msg(" * Getting Drive Information...");
 
 				try
 				{
-					//List<PC_Drive> lst_drives = new List<PC_Drive>();
-
-					//ManagementClass wmi;
-
-					//wmi = new ManagementClass("Win32_DiskDrive");
-					//foreach (var m in wmi.GetInstances())
-					//{
-					//	Delegate_Msg(" * Drives: Adding Disk " + m["Caption"].ToString());
-
-					//	if (m["Size"] != null)
-					//	{
-					//		lst_drives.Add(new PC_Drive
-					//		{
-					//			Type = "Disk",
-					//			Index = Convert.ToInt32(m["Index"].ToString()),
-					//			Name = m["Caption"].ToString(),
-					//			Size_U64 = (ulong)m["Size"],
-					//			Size = Helper.ToSize((ulong)m["Size"]),
-					//			Partition = m["Partitions"]!= null ? m["Partitions"].ToString() : ""
-					//		});
-					//	}
-					//}
-
-					//wmi = new ManagementClass("Win32_LogicalDisk");
-					//foreach (var m in wmi.GetInstances())
-					//{
-					//	int iDType = Convert.ToInt32(m["DriveType"]);
-
-					//	Delegate_Msg(" * Drives: Adding Drives " + m["Name"].ToString());
-
-
-					//	if (iDType <= 3 || iDType == 5)
-					//	{
-					//		PC_Drive _drv = new PC_Drive();
-
-					//		string sName = "";
-
-					//		try
-					//		{
-					//			sName = (string)m["VolumeName"] ?? "";
-
-					//			if (sName == "")
-					//				sName = m["Description"].ToString();
-
-					//			if (m["Name"] != null)
-					//				sName += " (" + m["Name"].ToString() + ")";
-					//		}
-					//		catch { }
-
-					//		//if (m["Caption"].ToString() != "")
-					//		//    sName += " (" + m["Caption"].ToString() + ")";
-
-					//		_drv.Type = "Drive";
-					//		_drv.Name = sName;
-					//		_drv.Letter = m["Name"].ToString().Length > 1 ? m["Name"].ToString().Substring(0, 1) : m["Name"].ToString();
-
-					//		if (m["Size"] != null)
-					//		{
-					//			_drv.FileSystem = m["FileSystem"].ToString();
-
-					//			_drv.Size_U64 = (ulong)m["Size"];
-					//			_drv.Size = Helper.ToSize((ulong)m["Size"]);
-					//			_drv.Free = Helper.ToSize((ulong)m["FreeSpace"]);
-					//			_drv.Used = Helper.ToSize(((ulong)m["Size"] - (ulong)m["FreeSpace"]));
-
-					//			lst_drives.Add(_drv);
-					//		}
-					//	}
-
-					//	if (iDType == 4 || iDType > 5)
-					//	{
-					//		lst_drives.Add(new PC_Drive
-					//		{
-					//			Type = "Drive",
-					//			Name = m["ProviderName"].ToString() + " (" + m["Caption"].ToString() + ") ",
-					//			Letter = m["Caption"].ToString().Length > 1 ? m["Caption"].ToString().Substring(0, 1) : m["Caption"].ToString(),
-					//			FileSystem = "Network",
-					//			DevType = "NET",
-					//			Size = "",
-					//			Free = "",
-					//			Used = ""
-					//		});
-					//	}
-					//}
-
-					//ManagementScope MScope_MSFT = new ManagementScope(@"\\.\root\microsoft\windows\storage");
-					//MScope_MSFT.Connect();
-					//ManagementObjectSearcher ObjSch;
-
-					//Delegate_Msg(" * Drives: Setting Disk to Drive ...");
-
-					//ObjSch = new ManagementObjectSearcher(MScope_MSFT, new ObjectQuery("SELECT * FROM MSFT_Partition"));
-					//foreach (ManagementObject m in ObjSch.Get())
-					//{
-					//	foreach (PC_Drive d in lst_drives)
-					//	{
-					//		if (d.Type == "Drive" && m["DriveLetter"].ToString() == d.Letter)
-					//		{
-					//			d.Index = Convert.ToInt32(m["DiskNumber"].ToString());
-					//		}
-					//	}
-					//}
-
-					//Delegate_Msg(" * Drives: Setting media type ...");
-
-					//ObjSch = new ManagementObjectSearcher(MScope_MSFT, new ObjectQuery("SELECT * FROM MSFT_PhysicalDisk"));
-					//foreach (ManagementObject m in ObjSch.Get()) //MSFT_PhysicalDisk - Determine HDD or SSD
-					//{
-					//	foreach (PC_Drive d in lst_drives)
-					//	{
-					//		if (m["DeviceID"].ToString() == d.Index.ToString() && d.FileSystem != "Network")
-					//		{
-					//			switch (m["MediaType"].ToString())
-					//			{
-					//				case "0":
-					//				case "3": d.DevType = "HDD"; break;
-					//				case "4": d.DevType = "SSD"; break;
-					//				case "5": d.DevType = "SCM"; break;
-					//					//default: d.DevType = ""; break;
-					//			}
-					//		}
-					//	}
-					//}
-
+					//List<PC_Drive> lst_drives0 = Globals.Get_WMI.Get_DrivesV2();
+					//sResult += Globals.Get_WMI.Get_Drives(lst_drives0);
 
 					List<PC_Drive> lst_drives = Globals.Get_WMI.Get_Volumes();
 					sResult += Globals.Get_WMI.Get_Drives(lst_drives);
-
-
-
-					//Delegate_Msg(" * Drives: Analyzing Disk...");
-
-					//var vLst0 = lst_drives.Where(t => t.Type == "Disk").OrderBy(x => x.Index).ToList();
-					//var vLst1 = lst_drives.Where(t => t.Type == "Drive").OrderBy(x => x.Letter).ToList();
-
-					//var vOS_Drv = lst_drives.Where(t => t.Letter == "C").FirstOrDefault();
-					//if (vOS_Drv != null)
-					//{
-					//	_pcinfo.OS_DiskIndex = vOS_Drv.Index;
-					//}
-
-					//sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-					//sResult += Helper.PadString("   DISK ", 45) +
-					//			Helper.PadString("Size ", 17) +
-					//			Helper.PadString("Partitions ", 15) +
-					//			Helper.PadString("Type ", 15) + Environment.NewLine;
-					//sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-
-					//foreach (PC_Drive drv in vLst0)
-					//{
-					//	Delegate_Msg(" * Drives: Disk " + drv.Index);
-
-					//	sResult += Helper.PadString("     [" + drv.Index + "] " + drv.Name, 45);
-					//	//sResult += Helper.PadString("     " + drv.Name, 45);
-					//	sResult += Helper.PadString(drv.Size ?? "", 17);
-					//	sResult += Helper.PadString(drv.Partition ?? "", 15);
-					//	sResult += Helper.PadString(drv.DevType ?? "", 15) + Environment.NewLine;
-
-					//	if (_pcinfo.OS_DiskIndex == drv.Index)
-					//	{
-					//		_pcinfo.OS_DiskType = drv.DevType ?? "";
-					//		_pcinfo.OS_DiskSize = Helper.FormatSize(Convert.ToInt64(drv.Size_U64));
-					//	}
-					//}
-
-					//sResult += Environment.NewLine;
-
-
-					//Delegate_Msg(" * Drives: Analyzing Drives...");
-
-					//sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-					//sResult += Helper.PadString("   DRIVES ", 45) +
-					//			Helper.PadString("Used ", 17) +
-					//			Helper.PadString("Capacity ", 15) +
-					//			Helper.PadString("File System ", 15) + Environment.NewLine;
-					//sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-
-					//foreach (PC_Drive drv in vLst1)
-					//{
-					//	Delegate_Msg(" * Drives: Drive " + drv.Letter);
-
-					//	if (drv.FileSystem == "Network")
-					//	{
-					//		sResult += Helper.PadString("     " + drv.Name, 45);
-					//	}
-					//	else
-					//	{
-					//		sResult += Helper.PadString("     [" + drv.Index + "] " + drv.Name ?? "", 45);
-					//		sResult += Helper.PadString(drv.Used ?? "", 17);
-					//		sResult += Helper.PadString(drv.Size ?? "", 15);
-					//	}
-
-					//	sResult += Helper.PadString(drv.FileSystem, 15) + Environment.NewLine;
-					//}
-
-					//sResult += Environment.NewLine;
-
 				}
 				catch (Exception ex)
 				{
 					Delegate_Msg(" Error : " + ex.Message);
-
-					File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + "_errors.txt", txtStatus.Text);
+					File.WriteAllText(Application.StartupPath + "\\" + sFileName + "_errors.txt", txtStatus.Text);
 				}
 
                 Delegate_Msg(" * Getting Input Information...");
 
 				try
 				{
-					//List<PC_Devices> lst_devices = new List<PC_Devices>();
-					ManagementClass wmi;
-
 					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
 					sResult += Helper.PadString("   Input Device", 62) +
 								   Helper.PadString("ID", 30) + Environment.NewLine;
@@ -298,65 +101,29 @@ namespace AyanixAudit
 				catch (Exception ex)
 				{
 					Delegate_Msg(" Error : " + ex.Message);
-
-					File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + "_errors.txt", txtStatus.Text);
+					File.WriteAllText(Application.StartupPath + "\\" + sFileName + "_errors.txt", txtStatus.Text);
 				}
-
 
 				Delegate_Msg(" * Getting Printers...");
 
-				try
-				{
-					ManagementClass wmi;
-
-					sResult += Environment.NewLine;
-					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-					sResult += Helper.PadString("   Printer Name", 62) +
-							   Helper.PadString("Port", 30) + Environment.NewLine;
-					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-
-					wmi = new ManagementClass("Win32_Printer");
-					foreach (var prn in wmi.GetInstances())
-					{
-						sResult += Helper.PadString("     " + prn["DriverName"].ToString(), 62);
-						sResult += Helper.PadString(prn["PortName"].ToString(), 30);
-						sResult += Environment.NewLine;
-					}
+				try{
+					sResult += Globals.Get_WMI.Get_Printers();
 				}
 				catch (Exception ex)
 				{
 					Delegate_Msg(" Error : " + ex.Message);
-					File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + "_errors.txt", txtStatus.Text);
+					File.WriteAllText(Application.StartupPath + "\\" + sFileName + "_errors.txt", txtStatus.Text);
 				}
-
-
 
 				Delegate_Msg(" * Getting Network Adapter...");
 
-				try
-				{
-					List<PC_Devices> lst_devices = Globals.Get_WMI.Get_NetAdapters();
-
-					sResult += Environment.NewLine;
-					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-					sResult += Helper.PadString("   Network Adapter ", 62) +
-								Helper.PadString("MAC Address ", 30) + Environment.NewLine;
-					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-
-					foreach (PC_Devices dev in lst_devices)
-					{
-						sResult += Helper.PadString("     " + dev.Name, 62);
-						sResult += Helper.PadString(dev.DevID, 30);
-						sResult += Environment.NewLine;
-					}
-
-					sResult += Environment.NewLine;
+				try{
+					sResult += Globals.Get_WMI.Get_NetworkAdapter();
 				}
 				catch (Exception ex)
 				{
 					Delegate_Msg(" Error : " + ex.Message);
-
-					File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + "_errors.txt", txtStatus.Text);
+					File.WriteAllText(Application.StartupPath + "\\" + sFileName + "_errors.txt", txtStatus.Text);
 				}
 
                 Delegate_Msg(" * Getting Network Connections...");
@@ -368,8 +135,10 @@ namespace AyanixAudit
 				_pcinfo = Globals.Get_WMI._pc;
 
 				Delegate_Msg(" * Saving Data...");
-				try{
-                    File.WriteAllText(Application.StartupPath + "\\" + Environment.MachineName + ".txt" , sResult);
+
+				try
+				{
+                    File.WriteAllText(Application.StartupPath + "\\" + sFileName + ".txt" , sResult);
                 }
                 catch(Exception){}
 
@@ -402,7 +171,7 @@ namespace AyanixAudit
 
 				Thread.Sleep(1000);
 
-                Delegate_Msg(sResult,true);
+				Delegate_Msg(sResult,true);
             });
 
             T.Start();
