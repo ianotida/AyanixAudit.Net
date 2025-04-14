@@ -40,6 +40,7 @@ namespace AyanixAudit.Models
     public class PC_Drive
     {
         public int Index { get; set; }
+        public int Boot { get; set; }
         public string Letter { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }

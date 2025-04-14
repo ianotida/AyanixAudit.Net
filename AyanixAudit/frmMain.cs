@@ -61,11 +61,11 @@ namespace AyanixAudit
 
 				try
 				{
-					//List<PC_Drive> lst_drives0 = Globals.Get_WMI.Get_DrivesV2();
-					//sResult += Globals.Get_WMI.Get_Drives(lst_drives0);
+					List<PC_Drive> lst = Globals.Get_WMI.Get_DrivesV2();
 
-					List<PC_Drive> lst_drives = Globals.Get_WMI.Get_Volumes();
-					sResult += Globals.Get_WMI.Get_Drives(lst_drives);
+					sResult += Globals.Get_WMI.Get_Disk(lst.Where(d => d.Type == "Disk").ToList());
+
+					sResult += Globals.Get_WMI.Get_Drives(lst.Where(d => d.Type == "Drive").ToList());
 				}
 				catch (Exception ex)
 				{
@@ -75,28 +75,8 @@ namespace AyanixAudit
 
                 Delegate_Msg(" * Getting Input Information...");
 
-				try
-				{
-					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-					sResult += Helper.PadString("   Input Device", 62) +
-								   Helper.PadString("ID", 30) + Environment.NewLine;
-					sResult += " -------------------------------------------------------------------------------------------------------------------" + Environment.NewLine;
-
-					wmi = new ManagementClass("Win32_KeyBoard");
-					foreach (var kyb in wmi.GetInstances())
-					{
-						sResult += Helper.PadString("     " + kyb["Description"].ToString(), 62);
-						sResult += Helper.PadString(kyb["PNPDeviceId"].ToString(), 30);
-						sResult += Environment.NewLine;
-					}
-
-					wmi = new ManagementClass("Win32_PointingDevice");
-					foreach (var mse in wmi.GetInstances())
-					{
-						sResult += Helper.PadString("     " + mse["Manufacturer"].ToString() + " " + mse["Caption"].ToString(), 62);
-						sResult += Helper.PadString(mse["PNPDeviceId"].ToString(), 30);
-						sResult += Environment.NewLine;
-					}
+				try{
+					sResult += Globals.Get_WMI.Get_Inputs();
 				}
 				catch (Exception ex)
 				{
