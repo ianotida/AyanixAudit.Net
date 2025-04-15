@@ -7,6 +7,7 @@ using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace AyanixAudit.Globals
 {
@@ -15,7 +16,6 @@ namespace AyanixAudit.Globals
         private const string sDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
         private const string sDateFormat = "yyyy-MM-dd";
         private const string sLinesss = " -------------------------------------------------------------------------------------------------------------------";
-
 
         public static PC_Info _pc = new PC_Info();
 
@@ -326,10 +326,18 @@ namespace AyanixAudit.Globals
                 wmi = new ManagementClass("Win32_PhysicalMemory");
                 foreach  (var m in wmi.GetInstances())
                 {
+                    string sSpeed = m["Speed"].ToString();
+                    int iSpeed = Convert.ToInt32(m["Speed"].ToString());
+
+                    if(iSpeed < 4400) sSpeed = m["Speed"].ToString() + " (DDR4)"; 
+                    if(iSpeed < 1800) sSpeed = m["Speed"].ToString() + " (DDR3)";  
+                    if(iSpeed < 1000) sSpeed = m["Speed"].ToString() + " (DDR2)";
+                    if(iSpeed < 400) sSpeed = m["Speed"].ToString() + " (DDR)"; 
+                             
                     sResult += Helper.PadString("     " + m["DeviceLocator"].ToString().Trim() + " - " + m["BankLabel"].ToString(), 45);
                     sResult += Helper.PadString(m["Manufacturer"].ToString().Trim(), 32);
                     sResult += Helper.PadString(Helper.ToSize((ulong)m["Capacity"]), 17);
-                    sResult += Helper.PadString(m["Speed"].ToString(), 15) + Environment.NewLine ;        
+                    sResult += Helper.PadString(sSpeed, 15) + Environment.NewLine ;        
                 }
 
                 sResult +=Environment.NewLine;
@@ -339,9 +347,54 @@ namespace AyanixAudit.Globals
             return sResult;
         }
 
+        public static string Get_Graphics()
+        {
+            string sResult = "";
+
+            try
+            {
+                string sName = "";
+
+                ManagementClass wmi;
+
+                sResult +=  sLinesss + Environment.NewLine;
+                sResult +=  Helper.PadString("   DISPLAY GPU ", 62) +
+                            Helper.PadString("Resolution ", 32) +
+                            Helper.PadString("Version ", 20)  + Environment.NewLine;    
+                sResult +=  sLinesss + Environment.NewLine;
+
+                wmi = new ManagementClass("Win32_VideoController");
+                foreach  (var m in wmi.GetInstances())
+                {
+                    sName = m["Caption"].ToString();
+
+                    sName = Regex.Replace(sName, @"\b(Microsoft Corporation - WDDM 1.0)\b", "Microsoft");
+
+
+                    sResult += Helper.PadString("     " + sName, 62);
+
+                    if (m["CurrentHorizontalResolution"] != null)
+                    {
+                        sResult += Helper.PadString(m["CurrentHorizontalResolution"].ToString() + "x" + 
+                                                    m["CurrentVerticalResolution"].ToString()  + " @ " + 
+                                                    m["CurrentRefreshRate"].ToString() + "Hz" ,32);
+
+                        sResult += Helper.PadString(m["DriverVersion"].ToString(), 20);
+                        sResult += Environment.NewLine ;        
+                    }
+                }
+
+                sResult += Environment.NewLine;
+            }
+            catch { }
+
+            return sResult;
+        }
+
         public static string Get_Printers()
         {
             string sResult = "";
+            int iCount = 0;
 
             ManagementClass wmi;
 
@@ -359,44 +412,9 @@ namespace AyanixAudit.Globals
 				sResult += Environment.NewLine;
 			}
 
-            return sResult;
-        }
+            iCount += wmi.GetInstances().Count;
 
-        public static string Get_Graphics()
-        {
-            string sResult = "";
-
-            try
-            {
-                ManagementClass wmi;
-
-                sResult +=  sLinesss + Environment.NewLine;
-                sResult +=  Helper.PadString("   DISPLAY GPU ", 62) +
-                            Helper.PadString("Resolution ", 32) +
-                            Helper.PadString("Version ", 20)  + Environment.NewLine;    
-                sResult +=  sLinesss + Environment.NewLine;
-
-                wmi = new ManagementClass("Win32_VideoController");
-                foreach  (var m in wmi.GetInstances())
-                {
-                    sResult += Helper.PadString("     " + m["Caption"].ToString(), 62);
-
-                    if (m["CurrentHorizontalResolution"] != null)
-                    {
-                        sResult += Helper.PadString(m["CurrentHorizontalResolution"].ToString() + " x " + 
-                                                    m["CurrentVerticalResolution"].ToString()  + " @ " + 
-                                                    m["CurrentRefreshRate"].ToString() + " Hz" ,32);
-
-                        sResult += Helper.PadString(m["DriverVersion"].ToString(), 20);
-                        sResult += Environment.NewLine ;        
-                    }
-                }
-
-                sResult += Environment.NewLine;
-            }
-            catch { }
-
-            return sResult;
+            return iCount == 0 ? "" : sResult;
         }
 
         public static string Get_Inputs()
@@ -428,12 +446,74 @@ namespace AyanixAudit.Globals
 				sResult += Environment.NewLine;
 			}
 
-             iCount += wmi.GetInstances().Count;
+            iCount += wmi.GetInstances().Count;
 
 
             return iCount == 0 ? "" : sResult;
         }
 
+        public static string Get_Disk(List<PC_Drive> lst)
+        {
+            string sResult = "";
+            var vLst = lst.OrderBy(x => x.Index).ToList();
+
+            sResult += sLinesss + Environment.NewLine;
+            sResult += Helper.PadString("   DISK ", 45) +
+                        Helper.PadString("Size ", 17) +
+                        Helper.PadString("Partitions ", 15) +
+                        Helper.PadString("Type ", 15) + Environment.NewLine;
+            sResult += sLinesss + Environment.NewLine;
+
+            foreach (PC_Drive drv in vLst)
+            {
+                sResult += Helper.PadString("     [" + drv.Index + "] " + drv.Name, 45);
+                sResult += Helper.PadString(drv.Size, 17);
+                sResult += Helper.PadString(drv.Partition, 15);
+                sResult += Helper.PadString(drv.DevType, 15) + Environment.NewLine;
+
+                if (drv.Boot == 1)
+                {
+                    _pc.OS_DiskIndex = drv.Index;
+                    _pc.OS_DiskSize = Helper.FormatSize(Convert.ToInt64(drv.Size_U64));
+                    _pc.OS_DiskType = drv.DevType;
+                }
+            }
+
+            return sResult;
+        }
+
+        public static string Get_Drives(List<PC_Drive> lst)
+        {
+            string sResult = "";
+            var vLst1 = lst.OrderBy(x => x.Letter).ToList();
+
+            sResult += Environment.NewLine;
+            sResult += sLinesss + Environment.NewLine;
+            sResult += Helper.PadString("   DRIVES ", 45) +
+                        Helper.PadString("Used ", 17) +
+                        Helper.PadString("Capacity ", 15) +
+                        Helper.PadString("File System ", 15) + Environment.NewLine;
+            sResult += sLinesss + Environment.NewLine;
+
+            foreach (PC_Drive drv in vLst1)
+            {
+                if(drv.FileSystem == "Network"){
+                    sResult += Helper.PadString("     " + drv.Name, 45);
+                }
+                else
+                {
+                    sResult += Helper.PadString("     [" + drv.Index + "] " + drv.Name, 45);
+                }
+
+                sResult += Helper.PadString(drv.Used, 17);
+                sResult += Helper.PadString(drv.Size, 15);
+                sResult += Helper.PadString(drv.FileSystem, 15) + Environment.NewLine;
+            }
+            
+            sResult += Environment.NewLine;
+
+            return sResult;
+        }
 
         public static string Get_NetworkAdapter()
         {
@@ -510,70 +590,6 @@ namespace AyanixAudit.Globals
             return sResult;
         }
 
-
-        public static string Get_Disk(List<PC_Drive> lst)
-        {
-            string sResult = "";
-            var vLst = lst.OrderBy(x => x.Index).ToList();
-
-            sResult += sLinesss + Environment.NewLine;
-            sResult += Helper.PadString("   DISK ", 45) +
-                        Helper.PadString("Size ", 17) +
-                        Helper.PadString("Partitions ", 15) +
-                        Helper.PadString("Type ", 15) + Environment.NewLine;
-            sResult += sLinesss + Environment.NewLine;
-
-            foreach (PC_Drive drv in vLst)
-            {
-                sResult += Helper.PadString("     [" + drv.Index + "] " + drv.Name, 45);
-                sResult += Helper.PadString(drv.Size, 17);
-                sResult += Helper.PadString(drv.Partition, 15);
-                sResult += Helper.PadString(drv.DevType, 15) + Environment.NewLine;
-
-                if (drv.Boot == 1)
-                {
-                    _pc.OS_DiskIndex = drv.Index;
-                    _pc.OS_DiskSize = Helper.FormatSize(Convert.ToInt64(drv.Size_U64));
-                    _pc.OS_DiskType = drv.DevType;
-                }
-            }
-
-            return sResult;
-        }
-
-        public static string Get_Drives(List<PC_Drive> lst)
-        {
-            string sResult = "";
-            var vLst1 = lst.OrderBy(x => x.Letter).ToList();
-
-            sResult += Environment.NewLine;
-            sResult += sLinesss + Environment.NewLine;
-            sResult += Helper.PadString("   DRIVES ", 45) +
-                        Helper.PadString("Used ", 17) +
-                        Helper.PadString("Capacity ", 15) +
-                        Helper.PadString("File System ", 15) + Environment.NewLine;
-            sResult += sLinesss + Environment.NewLine;
-
-            foreach (PC_Drive drv in vLst1)
-            {
-                if(drv.FileSystem == "Network"){
-                    sResult += Helper.PadString("     " + drv.Name, 45);
-                }
-                else
-                {
-                    sResult += Helper.PadString("     [" + drv.Index + "] " + drv.Name, 45);
-                }
-
-                sResult += Helper.PadString(drv.Used, 17);
-                sResult += Helper.PadString(drv.Size, 15);
-                sResult += Helper.PadString(drv.FileSystem, 15) + Environment.NewLine;
-            }
-            
-            sResult += Environment.NewLine;
-
-            return sResult;
-        }
-
         public static string Get_Softwares()
         {
             string sResult = "";
@@ -601,7 +617,7 @@ namespace AyanixAudit.Globals
 			//foreach (var m in wmi.GetInstances())
 			//{
 			//	if ((bool)m["Bootable"] && 
-   //                       m["Description"].ToString() != "Unknown") sBookDisk = m["DiskIndex"].ToString();
+            //      m["Description"].ToString() != "Unknown") sBookDisk = m["DiskIndex"].ToString();
 			//}
 
             List<PC_Drive> _lst = new List<PC_Drive>();
@@ -615,7 +631,6 @@ namespace AyanixAudit.Globals
             {
                 int iDiskIndex = Convert.ToInt32(d["Index"].ToString());
                 int iBoot = 0;
- 
 
                 var PatQueryText = string.Format("associators of {{{0}}} where AssocClass = Win32_DiskDriveToDiskPartition", d.Path.RelativePath);
                 var PatQuery = new ManagementObjectSearcher(PatQueryText);
@@ -686,8 +701,6 @@ namespace AyanixAudit.Globals
                     Boot = iBoot,
                     DevType = d["Caption"].ToString().Contains("SSD") ? "SSD" : "HDD"
                 });           
-            
-            
             }
 
             return _lst;
