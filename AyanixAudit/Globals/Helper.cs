@@ -34,6 +34,8 @@ namespace AyanixAudit
 
             if(suf[place] == " GB")
             {
+                if (size > 100 && size < 200) sSize = "120 GB";
+                if (size > 200 && size < 300) sSize = "240 GB";
                 if (size > 400 && size < 600) sSize = "500 GB";
                 if (size > 900 ) sSize = "1 TB";
             }

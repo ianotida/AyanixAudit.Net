@@ -1,6 +1,7 @@
  ===================================================================================================================
   GENERAL INFORMATION
  ===================================================================================================================
+   System Maker                            : HP
    System Model                            : HP Z240 Tower Workstation
    Board Model                             : 802F
    Board Serial No                         : PESRH0WCYA70ZJ
@@ -18,17 +19,17 @@
    OS Installed Date                       : 2022-11-18 02:43:52
 
  -------------------------------------------------------------------------------------------------------------------
-   DIMM SLOT                                 Maker                           Size             Speed (MHz)    
+   DIMM SLOT                                 Maker                           Size             Speed (MHz)           
  -------------------------------------------------------------------------------------------------------------------
-     DIMM1 - ChannelB                        Samsung                         4.00 GB          2400 (DDR4)    
-     DIMM2 - ChannelB                        Samsung                         4.00 GB          2400 (DDR4)    
-     DIMM3 - ChannelA                        Samsung                         4.00 GB          2400 (DDR4)    
-     DIMM4 - ChannelA                        Samsung                         4.00 GB          2400 (DDR4)    
+     DIMM1 - ChannelB                        Samsung                         4.00 GB          2400 (DDR4)
+     DIMM2 - ChannelB                        Samsung                         4.00 GB          2400 (DDR4)
+     DIMM3 - ChannelA                        Samsung                         4.00 GB          2400 (DDR4)
+     DIMM4 - ChannelA                        Samsung                         4.00 GB          2400 (DDR4)
 
  -------------------------------------------------------------------------------------------------------------------
-   DISPLAY GPU                                                Resolution                      Version             
+   DISPLAY GPU                                                Resolution                      Version               
  -------------------------------------------------------------------------------------------------------------------
-     Intel(R) HD Graphics P630                                1920x1080 @ 59 Hz               22.20.16.4811       
+     Intel(R) HD Graphics P630                                1920x1080 @ 59Hz                22.20.16.4811
 
  -------------------------------------------------------------------------------------------------------------------
    DISK                                      Size             Partitions     Type           
@@ -39,8 +40,8 @@
  -------------------------------------------------------------------------------------------------------------------
    DRIVES                                    Used             Capacity       File System    
  -------------------------------------------------------------------------------------------------------------------
-     [0] HD OS (C:)                          206.54 GB        930.76 GB      NTFS           
-     [1] HD DATA (D:)                        227.87 GB        478.51 GB      NTFS           
+     [0] HD OS (C:)                          213.76 GB        930.76 GB      NTFS           
+     [1] HD DATA (D:)                        229.65 GB        478.51 GB      NTFS           
      [1] HD BACKUP (E:)                      220.91 GB        453.00 GB      NTFS           
 
  -------------------------------------------------------------------------------------------------------------------
@@ -57,22 +58,22 @@
      Microsoft Print To PDF                                   PORTPROMPT:                   
 
  -------------------------------------------------------------------------------------------------------------------
-   Network Adapter                                                                            MAC Address                   
+   Network Adapter                                                                            MAC Address 
  -------------------------------------------------------------------------------------------------------------------
-     Intel(R) Ethernet Connection (2) I219-LM                                                 -NA-                          
-     Intel(R) PRO/1000 PT Dual Port Network Connection                                        E8:39:35:11:15:6E             
-     Intel(R) PRO/1000 PT Dual Port Network Connection                                        E8:39:35:11:15:6F             
+     Intel(R) Ethernet Connection (2) I219-LM                                                 -NA-
+     Intel(R) PRO/1000 PT Dual Port Network Connection                                        E8:39:35:11:15:6E
+     Intel(R) PRO/1000 PT Dual Port Network Connection                                        E8:39:35:11:15:6F
 
  -------------------------------------------------------------------------------------------------------------------
-   IP Address                                Netmask          Gateway                         MAC Address       
+   IP Address                                Netmask          Gateway                         MAC Address          
  -------------------------------------------------------------------------------------------------------------------
-     10.0.3.108                              255.255.252.0    10.0.1.254                      E8:39:35:11:15:6E 
-     192.168.121.21                          255.255.252.0                                    E8:39:35:11:15:6F 
+     10.0.3.108                              255.255.252.0    10.0.1.254                      E8:39:35:11:15:6E    
+     192.168.121.21                          255.255.252.0                                    E8:39:35:11:15:6F    
 
  -------------------------------------------------------------------------------------------------------------------
    INSTALLED SOFTWARE                                                                         VERSION
  -------------------------------------------------------------------------------------------------------------------
-     Adobe Acrobat Reader                                                                     25.001.20435
+     Adobe Acrobat Reader                                                                     25.001.20474
      Adobe Photoshop 2020                                                                     21.0.2
      Adobe Refresh Manager                                                                    1.8.0
      Apple Software Update                                                                    2.1.3.127
@@ -81,7 +82,7 @@
      Entity Framework 6.5.0 Tools  for Visual Studio 2022                                     6.5.0.0
      Foxit PDF Reader                                                                         12.1.2.15332
      Free ISO Creator version 1.0                                                             1.0
-     GitHub Desktop                                                                           3.4.18
+     GitHub Desktop                                                                           3.4.19
      Graphtec Studio                                                                          2.2.1252
      Herramientas de corrección de Microsoft Office 2016: español                             16.0.4266.1001
      icecap_collection_neutral                                                                16.9.31004
@@ -134,9 +135,9 @@
      Microsoft ASP.NET Web Tools Packages 17.0 - ENU                                          17.0.40305.0
      Microsoft Build Tools 14.0 (x86)                                                         14.0.23107
      Microsoft Build Tools Language Resources 14.0 (x86)                                      14.0.23107
-     Microsoft Edge                                                                           135.0.3179.73
-     Microsoft Edge Dev                                                                       136.0.3240.8
-     Microsoft Edge WebView2 Runtime                                                          135.0.3179.73
+     Microsoft Edge                                                                           136.0.3240.76
+     Microsoft Edge Dev                                                                       138.0.3324.1
+     Microsoft Edge WebView2 Runtime                                                          136.0.3240.76
      Microsoft Excel MUI (English) 2016                                                       16.0.4266.1001
      Microsoft Exchange Web Services Managed API 2.1                                          15.0.847.30
      Microsoft Groove MUI (English) 2016                                                      16.0.4266.1001
@@ -255,7 +256,7 @@
      SSMS Post Install Tasks                                                                  19.0.20209.0
      Telerik RadControls for WinForms Q3 2010                                                 10.3.1110.0
      Tools for .Net 3.5                                                                       3.11.50727
-     Trend Micro Apex One Security Agent                                                      14.0.14320
+     Trend Micro Apex One Security Agent                                                      14.0.14492
      UE4 Prerequisites (x64)                                                                  1.0.14.0
      Update for  (KB2504637)                                                                  1
      Update for Skype for Business 2016 (KB5002567) 32-Bit Edition                            

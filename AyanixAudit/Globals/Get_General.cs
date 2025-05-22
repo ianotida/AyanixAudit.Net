@@ -70,7 +70,7 @@ namespace AyanixAudit.Globals
 
                     _pc.OS_Hostname = Environment.MachineName;
                     _pc.OS_User = Environment.UserName;
-                    _pc.OS_Domain = (string)m["Domain"];
+                    _pc.OS_Domain = m["Domain"].ToString();
                 }
 
                 wmi = new ManagementClass("Win32_OperatingSystem");
@@ -285,7 +285,7 @@ namespace AyanixAudit.Globals
             PC_Info _info = Get_BoardInfo();
             
             string sResult = Helper.Title("GENERAL INFORMATION");
-
+            sResult += Helper.PadString("   System Maker", 42) + " : " + _info.Board_Maker + Environment.NewLine;
             sResult += Helper.PadString("   System Model", 42) + " : " + _info.System_Model + Environment.NewLine;
             sResult += Helper.PadString("   Board Model", 42) + " : " + _info.Board_Model + Environment.NewLine;
             sResult += Helper.PadString("   Board Serial No", 42) + " : " + _info.Board_Serial + Environment.NewLine;
@@ -320,7 +320,7 @@ namespace AyanixAudit.Globals
                 sResult += Helper.PadString("   DIMM SLOT ", 45) +
                            Helper.PadString("Maker", 32) +
                            Helper.PadString("Size ", 17) +
-                           Helper.PadString("Speed (MHz) ", 15)  + Environment.NewLine;
+                           Helper.PadString("Speed (MHz) ", 22)  + Environment.NewLine;
                 sResult += sLinesss + Environment.NewLine;
 
                 wmi = new ManagementClass("Win32_PhysicalMemory");
@@ -328,7 +328,8 @@ namespace AyanixAudit.Globals
                 {
                     string sSpeed = m["Speed"].ToString();
                     int iSpeed = Convert.ToInt32(m["Speed"].ToString());
-
+                    
+                    if(iSpeed < 6400) sSpeed = m["Speed"].ToString() + " (DDR5)"; 
                     if(iSpeed < 4400) sSpeed = m["Speed"].ToString() + " (DDR4)"; 
                     if(iSpeed < 1800) sSpeed = m["Speed"].ToString() + " (DDR3)";  
                     if(iSpeed < 1000) sSpeed = m["Speed"].ToString() + " (DDR2)";
@@ -337,7 +338,8 @@ namespace AyanixAudit.Globals
                     sResult += Helper.PadString("     " + m["DeviceLocator"].ToString().Trim() + " - " + m["BankLabel"].ToString(), 45);
                     sResult += Helper.PadString(m["Manufacturer"].ToString().Trim(), 32);
                     sResult += Helper.PadString(Helper.ToSize((ulong)m["Capacity"]), 17);
-                    sResult += Helper.PadString(sSpeed, 15) + Environment.NewLine ;        
+                    sResult += sSpeed;  
+                    sResult += Environment.NewLine ;
                 }
 
                 sResult +=Environment.NewLine;
@@ -360,7 +362,7 @@ namespace AyanixAudit.Globals
                 sResult +=  sLinesss + Environment.NewLine;
                 sResult +=  Helper.PadString("   DISPLAY GPU ", 62) +
                             Helper.PadString("Resolution ", 32) +
-                            Helper.PadString("Version ", 20)  + Environment.NewLine;    
+                            Helper.PadString("Version ", 22)  + Environment.NewLine;    
                 sResult +=  sLinesss + Environment.NewLine;
 
                 wmi = new ManagementClass("Win32_VideoController");
@@ -370,7 +372,6 @@ namespace AyanixAudit.Globals
 
                     sName = Regex.Replace(sName, @"\b(Microsoft Corporation - WDDM 1.0)\b", "Microsoft");
 
-
                     sResult += Helper.PadString("     " + sName, 62);
 
                     if (m["CurrentHorizontalResolution"] != null)
@@ -378,10 +379,14 @@ namespace AyanixAudit.Globals
                         sResult += Helper.PadString(m["CurrentHorizontalResolution"].ToString() + "x" + 
                                                     m["CurrentVerticalResolution"].ToString()  + " @ " + 
                                                     m["CurrentRefreshRate"].ToString() + "Hz" ,32);
-
-                        sResult += Helper.PadString(m["DriverVersion"].ToString(), 20);
-                        sResult += Environment.NewLine ;        
+                        sResult += m["DriverVersion"].ToString();
                     }
+                    else
+                    {
+                        sResult += Helper.PadString("" ,32);
+                    }
+
+                    sResult += Environment.NewLine;     
                 }
 
                 sResult += Environment.NewLine;
@@ -520,10 +525,9 @@ namespace AyanixAudit.Globals
             string sResult = "";
 
 			sResult += Environment.NewLine;
-			sResult +=  sLinesss + Environment.NewLine;
-			sResult += Helper.PadString("   Network Adapter ", 94) +
-						Helper.PadString("MAC Address ", 30) + Environment.NewLine;
-			sResult +=  sLinesss + Environment.NewLine;
+			sResult += sLinesss + Environment.NewLine;
+			sResult += Helper.PadString("   Network Adapter ", 94) + "MAC Address " + Environment.NewLine;
+			sResult += sLinesss + Environment.NewLine;
 
             ManagementClass wmi;
 
@@ -537,7 +541,7 @@ namespace AyanixAudit.Globals
                         !m["ProductName"].ToString().Contains("Virtual"))
                     {
                         sResult += Helper.PadString("     " + m["ProductName"].ToString(), 94);
-				        sResult += Helper.PadString(m["MACAddress"] != null? m["MACAddress"].ToString() : "-NA-", 30);
+				        sResult += m["MACAddress"] != null? m["MACAddress"].ToString() : "-NA-";
 				        sResult += Environment.NewLine;
                     }
                 }
@@ -560,7 +564,7 @@ namespace AyanixAudit.Globals
                 sResult += Helper.PadString("   IP Address ", 45) +
                               Helper.PadString("Netmask ", 17) +
                               Helper.PadString("Gateway ", 32) +
-                              Helper.PadString("MAC Address ", 18) + Environment.NewLine;
+                              Helper.PadString("MAC Address ", 21) + Environment.NewLine;
                 sResult += sLinesss + Environment.NewLine;
               
                 ObjSch = new ManagementObjectSearcher(MScope, new ObjectQuery("SELECT IPAddress,IPSubnet,DefaultIPGateway,MACAddress FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = 'TRUE'"));
@@ -579,7 +583,7 @@ namespace AyanixAudit.Globals
                         sResult += Helper.PadString("     " + arr_IP[i], 45) +
                                    Helper.PadString(arr_Sub[i], 17) +
                                    Helper.PadString(sIPGateway, 32) +
-                                   Helper.PadString(m["MACAddress"].ToString(), 18) + Environment.NewLine;
+                                   Helper.PadString(m["MACAddress"].ToString(), 21) + Environment.NewLine;
                     }
                 }
 

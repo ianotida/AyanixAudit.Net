@@ -123,15 +123,15 @@ namespace AyanixAudit
                 catch(Exception){}
 
 
-				Delegate_Msg(" * Checking Database connection...");
+				Delegate_Msg(" * Checking Database connection for 192.168.121.210...");
 
 				if (PingHost("192.168.121.210"))
 				{
-					if (SQL.Check_DB())
+					if (SQL.Check_DB(SQL._DB1))
 					{
 						Delegate_Msg(" * Database connection is OK.");
 
-						bool bUpload = UploadToSQL(_pcinfo, sResult);
+						bool bUpload = UploadToSQL(_pcinfo, sResult, SQL._DB1);
 
 						if (bUpload)
 						{
@@ -140,7 +140,25 @@ namespace AyanixAudit
 					}
 					else
 					{
-						Delegate_Msg(" * Database connection failed.");
+						Delegate_Msg(" * Database connection failed for 192.168.121.210 .");
+					}
+				}
+				else if (PingHost("10.0.1.29"))
+				{
+					if (SQL.Check_DB(SQL._DB2))
+					{
+						Delegate_Msg(" * Database connection is OK.");
+
+						bool bUpload = UploadToSQL(_pcinfo, sResult, SQL._DB2);
+
+						if (bUpload)
+						{
+							Delegate_Msg(" * Update Completed.");
+						}
+					}
+					else
+					{
+						Delegate_Msg(" * Database connection failed for 10.0.1.29.");
 					}
 				}
 				else
@@ -177,11 +195,11 @@ namespace AyanixAudit
 
 
 
-        private bool UploadToSQL(PC_Info _pc,string sRes)
+        private bool UploadToSQL(PC_Info _pc,string sRes, string sSQL)
         {
 			bool bUpdate = false;
 
-			using (SqlConnection SC = new SqlConnection(SQL._NPCIT))
+			using (SqlConnection SC = new SqlConnection(sSQL))
 			{
 				SC.Open();
 
