@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AyanixAudit
+namespace NPCAudit
 {
     public static class Helper
     {

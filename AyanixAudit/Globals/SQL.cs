@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
 
-namespace AyanixAudit
+namespace NPCAudit
 {
     public class SQL
     {

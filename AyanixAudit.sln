@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29509.3
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AyanixAudit", "AyanixAudit\AyanixAudit.csproj", "{A132584F-29EE-4D44-B52C-E1BDB822FDF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPCAudit", "AyanixAudit\NPCAudit.csproj", "{A132584F-29EE-4D44-B52C-E1BDB822FDF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

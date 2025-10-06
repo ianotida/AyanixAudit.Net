@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AyanixAudit.Properties
+namespace NPCAudit.Properties
 {
 
 

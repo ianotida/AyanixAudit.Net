@@ -1,15 +1,14 @@
-﻿using AyanixAudit.Models;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using NPCAudit.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
-namespace AyanixAudit.Globals
+namespace NPCAudit.Globals
 {
     public static class Get_WMI
     {
@@ -654,7 +653,7 @@ namespace AyanixAudit.Globals
                             _drv.Type = "Drive";
                             _drv.Letter = ld["Name"].ToString() != ""? ld["Name"].ToString().Substring(0, 1) : "";
 
-                            string sVolume = ld["VolumeName"].ToString() != "" ? ld["VolumeName"].ToString() : "";
+                            string sVolume = ld["VolumeName"] != null ? ld["VolumeName"].ToString() : "";
 
 							if (sVolume == "")
 								sVolume = ld["Description"].ToString();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AyanixAudit.Models
+namespace NPCAudit.Models
 {
     public class PC_Info
     {

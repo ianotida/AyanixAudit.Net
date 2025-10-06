@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "D:\\A.GITHUB\\AyanixAudit.Net\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\AyanixAudit.csproj|d:\\a.github\\ayanixaudit.net\\ayanixaudit\\globals\\helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\AyanixAudit.csproj|solutionrelative:ayanixaudit\\globals\\helper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\AyanixAudit.csproj|d:\\a.github\\ayanixaudit.net\\ayanixaudit\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\AyanixAudit.csproj|solutionrelative:ayanixaudit\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\AyanixAudit.csproj|D:\\A.GITHUB\\AyanixAudit.Net\\ayanixaudit\\globals\\get_general.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\AyanixAudit.csproj|solutionrelative:ayanixaudit\\globals\\get_general.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\AyanixAudit.csproj|D:\\A.GITHUB\\AyanixAudit.Net\\ayanixaudit\\globals\\sql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\AyanixAudit.csproj|solutionrelative:ayanixaudit\\globals\\sql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\NPCAudit.csproj|d:\\a.github\\ayanixaudit.net\\ayanixaudit\\globals\\get_general.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A132584F-29EE-4D44-B52C-E1BDB822FDF5}|AyanixAudit\\NPCAudit.csproj|solutionrelative:ayanixaudit\\globals\\get_general.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,51 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Helper.cs",
-              "DocumentMoniker": "D:\\A.GITHUB\\AyanixAudit.Net\\AyanixAudit\\Globals\\Helper.cs",
-              "RelativeDocumentMoniker": "AyanixAudit\\Globals\\Helper.cs",
-              "ToolTip": "D:\\A.GITHUB\\AyanixAudit.Net\\AyanixAudit\\Globals\\Helper.cs",
-              "RelativeToolTip": "AyanixAudit\\Globals\\Helper.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwCoAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-21T05:01:15.532Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SQL.cs",
-              "DocumentMoniker": "D:\\A.GITHUB\\AyanixAudit.Net\\AyanixAudit\\Globals\\SQL.cs",
-              "RelativeDocumentMoniker": "AyanixAudit\\Globals\\SQL.cs",
-              "ToolTip": "D:\\A.GITHUB\\AyanixAudit.Net\\AyanixAudit\\Globals\\SQL.cs",
-              "RelativeToolTip": "AyanixAudit\\Globals\\SQL.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBQAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T06:27:11.035Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Get_General.cs",
               "DocumentMoniker": "D:\\A.GITHUB\\AyanixAudit.Net\\AyanixAudit\\Globals\\Get_General.cs",
               "RelativeDocumentMoniker": "AyanixAudit\\Globals\\Get_General.cs",
               "ToolTip": "D:\\A.GITHUB\\AyanixAudit.Net\\AyanixAudit\\Globals\\Get_General.cs",
               "RelativeToolTip": "AyanixAudit\\Globals\\Get_General.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAFcAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T05:54:05.151Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmMain.cs",
-              "DocumentMoniker": "D:\\A.GITHUB\\AyanixAudit.Net\\AyanixAudit\\frmMain.cs",
-              "RelativeDocumentMoniker": "AyanixAudit\\frmMain.cs",
-              "ToolTip": "D:\\A.GITHUB\\AyanixAudit.Net\\AyanixAudit\\frmMain.cs",
-              "RelativeToolTip": "AyanixAudit\\frmMain.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwBAAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-12-17T20:02:50.319Z",
+              "WhenOpened": "2025-10-06T10:59:03.566Z",
               "EditorCaption": ""
             }
           ]

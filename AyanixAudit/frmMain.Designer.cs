@@ -1,4 +1,4 @@
-﻿namespace AyanixAudit
+﻿namespace NPCAudit
 {
     partial class frmMain
     {
@@ -58,7 +58,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ayanix Audit";
+            this.Text = "NPC Audit";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -5,12 +5,12 @@ using System.IO;
 using System.Threading;
 using System.Data;
 using System.Data.SqlClient;
-using AyanixAudit.Models;
+using NPCAudit.Models;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
-namespace AyanixAudit
+namespace NPCAudit
 {
     public partial class frmMain : Form
     {
@@ -46,8 +46,6 @@ namespace AyanixAudit
 				ManagementScope MScope = new ManagementScope("\\\\.\\root\\cimv2", ConOpt);
                 MScope.Connect();
 
-				ManagementClass wmi;
-
                 Delegate_Msg(" * Getting Board Information...");
                 sResult += Globals.Get_WMI.Get_Board();
 
@@ -64,7 +62,6 @@ namespace AyanixAudit
 					List<PC_Drive> lst = Globals.Get_WMI.Get_DrivesV2();
 
 					sResult += Globals.Get_WMI.Get_Disk(lst.Where(d => d.Type == "Disk").ToList());
-
 					sResult += Globals.Get_WMI.Get_Drives(lst.Where(d => d.Type == "Drive").ToList());
 				}
 				catch (Exception ex)
@@ -135,7 +132,7 @@ namespace AyanixAudit
 
 						if (bUpload)
 						{
-							Delegate_Msg(" * Update Completed.");
+							Delegate_Msg(" * Upload Completed on 192.168.121.210");
 						}
 					}
 					else
@@ -145,6 +142,8 @@ namespace AyanixAudit
 				}
 				else if (PingHost("10.0.1.29"))
 				{
+					Delegate_Msg(" * Checking Database connection for 10.0.1.29...");
+
 					if (SQL.Check_DB(SQL._DB2))
 					{
 						Delegate_Msg(" * Database connection is OK.");
@@ -153,7 +152,7 @@ namespace AyanixAudit
 
 						if (bUpload)
 						{
-							Delegate_Msg(" * Update Completed.");
+							Delegate_Msg(" * Update Completed on 10.0.1.29");
 						}
 					}
 					else
