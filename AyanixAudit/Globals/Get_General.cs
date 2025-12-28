@@ -101,8 +101,10 @@ namespace NPCAudit.Globals
 
                     if(m["Caption"].ToString().Length > 0)
                     {
-                        if (m["Caption"].ToString().Contains("SSD")) 
-                            sDevType = "SSD";
+                        if (m["Caption"].ToString().Contains("SSD")) sDevType = "SSD";
+
+                        if (m["Caption"].ToString().Contains("NVMe")) sDevType = "SSD";
+
                     }
 
                     _lst.Add(new PC_Drive
@@ -702,7 +704,7 @@ namespace NPCAudit.Globals
                     Size = Helper.ToSize((ulong)d["Size"]),
                     Partition = d["Partitions"].ToString(),
                     Boot = iBoot,
-                    DevType = d["Caption"].ToString().Contains("SSD") ? "SSD" : "HDD"
+                    DevType = d["Caption"].ToString().Contains("SSD") || d["Caption"].ToString().Contains("NVMe") ? "SSD" : "HDD"
                 });           
             }
 

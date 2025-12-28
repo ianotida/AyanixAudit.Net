@@ -57,18 +57,47 @@ namespace NPCAudit
 
                 Delegate_Msg(" * Getting Drive Information...");
 
+				List<PC_Drive> lst_disk = new List<PC_Drive>(); 
+
 				try
 				{
-					List<PC_Drive> lst = Globals.Get_WMI.Get_DrivesV2();
-
-					sResult += Globals.Get_WMI.Get_Disk(lst.Where(d => d.Type == "Disk").ToList());
-					sResult += Globals.Get_WMI.Get_Drives(lst.Where(d => d.Type == "Drive").ToList());
+					lst_disk = Globals.Get_WMI.Get_DrivesV2();
 				}
 				catch (Exception ex)
 				{
 					Delegate_Msg(" Error : " + ex.Message);
 					File.WriteAllText(Application.StartupPath + "\\" + sFileName + "_errors.txt", txtStatus.Text);
 				}
+
+				// FALLBACK IF ABOVE HAS ERRORS
+				if(lst_disk.Count == 0)
+				{
+					try
+					{
+						lst_disk = Globals.Get_WMI.Get_Volumes();
+					}
+					catch (Exception ex)
+					{
+						Delegate_Msg(" Error : " + ex.Message);
+						File.WriteAllText(Application.StartupPath + "\\" + sFileName + "_errors.txt", txtStatus.Text);
+					}
+				}
+
+				sResult += Globals.Get_WMI.Get_Disk(lst_disk.Where(d => d.Type == "Disk").ToList());
+				sResult += Globals.Get_WMI.Get_Drives(lst_disk.Where(d => d.Type == "Drive").ToList());
+
+				//try
+				//{
+				//	List<PC_Drive> lst = Globals.Get_WMI.Get_DrivesV2();
+
+				//	sResult += Globals.Get_WMI.Get_Disk(lst.Where(d => d.Type == "Disk").ToList());
+				//	sResult += Globals.Get_WMI.Get_Drives(lst.Where(d => d.Type == "Drive").ToList());
+				//}
+				//catch (Exception ex)
+				//{
+				//	Delegate_Msg(" Error : " + ex.Message);
+				//	File.WriteAllText(Application.StartupPath + "\\" + sFileName + "_errors.txt", txtStatus.Text);
+				//}
 
                 Delegate_Msg(" * Getting Input Information...");
 
@@ -235,14 +264,23 @@ namespace NPCAudit
 						DT_DevInfo.Rows[0]["Dev_ModelNo"] = _pc.System_Model;
 						
 						DT_DevInfo.Rows[0]["Dev_Maker"] = _pc.Board_Maker;
-						DT_DevInfo.Rows[0]["Dev_SerialNo"] = _pc.Board_Serial;
+
+						// Fix for Foxconn board for HP desktop.
+						if(_pc.Board_Maker != "HP" && _pc.Board_Model.Contains("HP ")) DT_DevInfo.Rows[0]["Dev_Maker"] = "HP";
+
+
+						if (_pc.Board_Serial != "")
+						{
+							DT_DevInfo.Rows[0]["Dev_SerialNo"] = _pc.Board_Serial;
+						}
+						
 
 						DT_DevInfo.Rows[0]["Dev_CPU"] = _pc.Processor_Name;
 						DT_DevInfo.Rows[0]["Dev_CPU_Cores"] = _pc.Processor_Cores;
 						DT_DevInfo.Rows[0]["Dev_RAM"] = _pc.System_RAM;
 
-						DT_DevInfo.Rows[0]["Dev_AssetNo"] = _pc.OS_Hostname;
-						DT_DevInfo.Rows[0]["Dev_OS_Hostname"] = _pc.OS_Hostname;
+						//DT_DevInfo.Rows[0]["Dev_AssetNo"] = _pc.OS_Hostname;
+						//DT_DevInfo.Rows[0]["Dev_OS_Hostname"] = _pc.OS_Hostname;
 
 						DT_DevInfo.Rows[0]["Dev_OS_Name"] = _pc.OS_Name + " " + _pc.OS_Build;
 						DT_DevInfo.Rows[0]["Dev_OS_Date"] = _pc.OS_InstallDate;
@@ -287,7 +325,16 @@ namespace NPCAudit
 					dr_new["Dev_AssetNo"] = _pc.OS_Hostname;
 					dr_new["Dev_Maker"] = _pc.Board_Maker;
 					dr_new["Dev_ModelNo"] = _pc.System_Model;
-					dr_new["Dev_SerialNo"] = _pc.Board_Serial;
+					
+
+					if(_pc.Board_Maker != "HP" && _pc.Board_Model.Contains("HP ")) dr_new["Dev_Maker"] = "HP";
+
+
+					if (_pc.Board_Serial != "")
+					{
+						dr_new["Dev_SerialNo"] = _pc.Board_Serial;
+					}
+
 
 					dr_new["Dev_CPU"] = _pc.Processor_Name;
 					dr_new["Dev_CPU_Cores"] = _pc.Processor_Cores;
